@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../Hooks/useAxiosSecure";
 import {
@@ -23,7 +23,8 @@ const formatDate = (dateString) => {
 const MealDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const queryClient = useQueryClient(); // ✅ FIXED
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const [cartQuantity, setCartQuantity] = useState(1);
 
@@ -65,6 +66,17 @@ const MealDetails = () => {
     return <p className="text-center mt-10 text-red-600">Meal not found.</p>;
 
   const totalPrice = cartQuantity * product.price;
+  const handlePay = (id, price, totalPrice, productName) => {
+    console.log(totalPrice);
+    navigate("/payments", {
+      state: {
+        id,
+        price,
+        totalPrice,
+        productName,
+      },
+    });
+  };
 
   return (
     <>
@@ -192,11 +204,18 @@ const MealDetails = () => {
 
                 {/* Buttons */}
                 <div className="space-y-3">
-                  <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors">
+                  <button
+                    onClick={() =>
+                      handlePay(
+                        product._id,
+                        product.price,
+                        totalPrice,
+                        product.productName
+                      )
+                    }
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                  >
                     <ShoppingCart className="w-5 h-5" />
-                    Add to Cart
-                  </button>
-                  <button className="w-full border border-orange-500 text-orange-500 hover:bg-orange-50 py-3 px-6 rounded-lg font-medium transition-colors">
                     Buy Now
                   </button>
                 </div>

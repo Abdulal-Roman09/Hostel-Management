@@ -11,8 +11,21 @@ import { Badge } from "@/components/ui/badge";
 import { Check, Star, Crown } from "lucide-react";
 import Footer from "../../components/shared/footer";
 import Navber from "../../components/shared/Navber";
+import { useNavigate } from "react-router-dom";
 
 const PackagesHome = () => {
+  const navigate = useNavigate();
+
+  const handleChoosePlan = (amount, title, description) => {
+    navigate("/packagePayments", {
+      state: {
+        amount,
+        title,
+        description,
+      },
+    });
+  };
+
   return (
     <>
       <Navber />
@@ -57,7 +70,12 @@ const PackagesHome = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-gray-600 hover:bg-gray-700">
+                <Button
+                  onClick={() =>
+                    handleChoosePlan(29, "Basic Plan", "Ideal for minimal meal needs")
+                  }
+                  className="w-full bg-gray-600 hover:bg-gray-700"
+                >
                   Choose Basic
                 </Button>
               </CardContent>
@@ -91,13 +109,18 @@ const PackagesHome = () => {
                     "Monthly meal feedback",
                     "Basic nutrition tracking",
                   ].map((text) => (
-                    <li className="flex space-y-2 items-center" key={text}>
+                    <li className="flex items-center" key={text}>
                       <Check className="w-4 h-4 text-green-500 mr-3" />
                       <span className="text-sm">{text}</span>
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-yellow-600 hover:bg-yellow-700">
+                <Button
+                  onClick={() =>
+                    handleChoosePlan(59, "Standard Plan", "Best for regular hostel life")
+                  }
+                  className="w-full bg-yellow-600 hover:bg-yellow-700"
+                >
                   Choose Standard
                 </Button>
               </CardContent>
@@ -133,7 +156,12 @@ const PackagesHome = () => {
                     </li>
                   ))}
                 </ul>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                <Button
+                  onClick={() =>
+                    handleChoosePlan(99, "Premium Plan", "For top-tier meal services")
+                  }
+                  className="w-full bg-purple-600 hover:bg-purple-700"
+                >
                   Choose Premium
                 </Button>
               </CardContent>

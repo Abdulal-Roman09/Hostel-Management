@@ -15,7 +15,9 @@ import MyCreationList from ".././Pages/Dashbord/Admin/MyCreationList";
 import AllMeals from "../Pages/Dashbord/User/AllMeals/AllMeals";
 import AllMealDetails from "./../Pages/Dashbord/User/AllMealDetails";
 import Customars from "./../Pages/Dashbord/Admin/Customars";
-import Dishes from './../Pages/Dashbord/Admin/Dishes';
+import Dishes from "./../Pages/Dashbord/Admin/Dishes";
+import Payments from "./../Pages/Dashbord/User/Payments/Payments";
+import PackagePayment from "./../Pages/Dashbord/User/PackaagePayments/PackagePayment";
 
 export const router = createBrowserRouter([
   {
@@ -49,7 +51,14 @@ export const router = createBrowserRouter([
     path: "/allmealsdetails/:id",
     element: <AllMealDetails />,
   },
-
+  {
+    path: "payments",
+    element: <Payments />,
+  },
+  {
+    path: "packagePayments",
+    element: <PackagePayment />,
+  },
   {
     path: "dashboard",
     element: (
@@ -77,11 +86,11 @@ export const router = createBrowserRouter([
       {
         path: "customers",
         element: <Customars />,
-      },{
-        path:'dishes',
-        element:<Dishes/>
-
-      }
+      },
+      {
+        path: "dishes",
+        element: <Dishes />,
+      },
     ],
   },
 ]);
