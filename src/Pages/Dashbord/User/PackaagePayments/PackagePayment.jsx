@@ -39,7 +39,7 @@ const PackagePayment = () => {
 
           <div className="border border-dashed border-gray-300 p-6 rounded-md text-center text-gray-500">
             <Elements stripe={stripePromise}>
-              <CheckoutForm amount={amount} />
+              <CheckoutForm amount={amount} title={title} />
             </Elements>
           </div>
         </div>
