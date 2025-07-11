@@ -17,6 +17,7 @@ import Footer from "./../../../components/shared/footer";
 import { FcLike } from "react-icons/fc";
 import useUserRole from "./../../../Hooks/useUserRole";
 import Loader from "./../../Loader/Loader";
+import CommentsSection from "./Comments/Comments";
 
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString();
@@ -248,6 +249,7 @@ const MealDetails = () => {
               </div>
             </div>
           </div>
+          <CommentsSection/>
 
           {/* Additional Info */}
           <div className="mt-8 bg-white rounded-2xl p-6 shadow-sm">

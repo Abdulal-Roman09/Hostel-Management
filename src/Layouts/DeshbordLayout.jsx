@@ -86,16 +86,18 @@ export default function DashboardLayout() {
                 <Zap className="w-4 h-4 text-orange-600" />
               </div>
             </div>
-            <p className="text-xs text-gray-600 mb-2">
-              🔥 Upgrade Your Plan. Find Out here
-            </p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full text-orange-600 border-orange-200 hover:bg-orange-50 bg-transparent"
-            >
-              Contact Support
-            </Button>
+            <Link to={"/packages"}>
+              <p className="text-xs text-gray-600 mb-2">
+                🔥 Upgrade Your Plan. Find Out here
+              </p>
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full text-orange-600 border-orange-200 hover:bg-orange-50 bg-transparent"
+              >
+                Contact Support
+              </Button>
+            </Link>
           </div>
 
           {/* Profile & Logout */}
@@ -175,11 +177,10 @@ export default function DashboardLayout() {
                     <Zap className="w-4 h-4 text-orange-600" />
                   </div>
                 </div>
-                <p className="text-xs text-gray-600 mb-2">
-                  🔥 Upgrade Your Plan. Find Out here
-                </p>
-                <Link to={"updateYourPlan"}>
-                  {" "}
+                <Link to={"/packages"}>
+                  <p className="text-xs text-gray-600 mb-2">
+                    🔥 Upgrade Your Plan. Find Out here
+                  </p>
                   <Button
                     variant="outline"
                     size="sm"

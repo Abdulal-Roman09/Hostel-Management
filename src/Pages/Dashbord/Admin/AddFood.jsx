@@ -43,6 +43,7 @@ export default function AddFood() {
           photo: user?.photoURL || "N/A",
         },
         createdAt: new Date().toISOString(),
+        comments: [],
       };
 
       const res = await axiosSecure.post("/foods", foodData);

@@ -40,7 +40,7 @@ const MyPayments = () => {
           <thead className="bg-orange-500 text-white">
             <tr>
               <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Buyer</th>
+              <th className="px-4 py-2">Recipe Id</th>
               <th className="px-4 py-2">Buyer Email</th>
               <th className="px-4 py-2">Recipe Title</th>
               <th className="px-4 py-2">Price</th>
@@ -54,15 +54,13 @@ const MyPayments = () => {
           </thead>
           <tbody>
             {payments.map((payment, index) => (
-              <tr key={payment.transaction?.id} className="border-t hover:bg-orange-50">
+              <tr
+                key={payment.transaction?.id}
+                className="border-t hover:bg-orange-50"
+              >
                 <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2 flex items-center gap-2">
-                  <img
-                    src={payment.buyer?.photo || "/placeholder.png"}
-                    alt="buyer"
-                    className="w-8 h-8 rounded-full object-cover"
-                  />
-                  {payment.buyer?.name}
+                <td className="px-4 py-2 ">
+                  {payment.recipe.id}
                 </td>
                 <td className="px-4 py-2">{payment.buyer?.email}</td>
                 <td className="px-4 py-2">{payment.recipe?.title}</td>
