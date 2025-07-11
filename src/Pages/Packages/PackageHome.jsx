@@ -29,7 +29,7 @@ const PackagesHome = () => {
   return (
     <>
       <Navber />
-      <main className="p-6">
+      <main className="p-6 bg-amber-50">
         {/* Meal Packages Section */}
         <div className="mb-8">
           <div className="text-center mb-8">

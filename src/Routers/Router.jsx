@@ -49,7 +49,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/allmealsdetails/:id",
-    element: <AllMealDetails />,
+    element: (
+      <PrivateRoute>
+        <AllMealDetails />
+      </PrivateRoute>
+    ),
   },
   {
     path: "payments",
