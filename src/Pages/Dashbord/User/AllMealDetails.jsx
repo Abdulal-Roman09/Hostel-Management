@@ -16,6 +16,7 @@ import Navbar from "./../../../components/shared/Navber";
 import Footer from "./../../../components/shared/footer";
 import { FcLike } from "react-icons/fc";
 import useUserRole from "./../../../Hooks/useUserRole";
+import Loader from "./../../Loader/Loader";
 
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString();
@@ -39,6 +40,7 @@ const MealDetails = () => {
     queryKey: ["mealDetails", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/foods/${id}`);
+      console.log("API response:", res.data);
       return res.data;
     },
     enabled: !!id,
@@ -63,20 +65,27 @@ const MealDetails = () => {
     }
   };
 
-  if (isLoading)
-    return <p className="text-center mt-10 text-orange-500">Loading...</p>;
+  if (isLoading) return <Loader />;
   if (isError || !product)
     return <p className="text-center mt-10 text-red-600">Meal not found.</p>;
 
   const totalPrice = cartQuantity * product.price;
-  const handlePay = (id, price, totalPrice, productName) => {
-    console.log(totalPrice);
+  const handlePay = ({
+    id,
+    price,
+    totalPrice,
+    productName,
+    addedByName,
+    addedByEmail,
+  }) => {
     navigate("/payments", {
       state: {
         id,
         price,
         totalPrice,
         productName,
+        addedByName,
+        addedByEmail,
       },
     });
   };
@@ -106,7 +115,6 @@ const MealDetails = () => {
                       onClick={() => likeMutation.mutate(product._id)}
                       className="flex items-center gap-1 text-red-500 hover:text-red-600"
                     >
-                      {/* <Heart color="red" size={40} className="w-4 h-4" /> */}
                       <FcLike className="hover:scale-120" size={60} />
                     </button>
                   )}
@@ -212,12 +220,15 @@ const MealDetails = () => {
                   {role === "subscriber" ? (
                     <button
                       onClick={() =>
-                        handlePay(
-                          product._id,
-                          product.price,
+                        handlePay({
+                          id: product._id,
+                          price: product.price,
                           totalPrice,
-                          product.productName
-                        )
+                          productName: product.productName,
+                          addedByName: product.addedBy?.name || "Unknown",
+                          addedByEmail:
+                            product.addedBy?.email || "unknown@example.com",
+                        })
                       }
                       className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
                     >

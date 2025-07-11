@@ -36,7 +36,7 @@ export default function DashboardLayout() {
     { icon: Users, label: "Customers", path: "customers" },
     { icon: Store, label: "MyCraetionList", path: "myCreationList" },
     { icon: UtensilsCrossed, label: "Dishes", path: "dishes" },
-    { icon: UserCheck, label: "Sellers", path: "/sellers" },
+    { icon: UserCheck, label: "MyPaymenst", path: "myPayments" },
     { icon: Wallet, label: "Packages", path: "packages" },
   ];
   // Custom active class for NavLink

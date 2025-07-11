@@ -23,7 +23,7 @@ const MyList = () => {
     queryFn: async () => {
       const res = await axiosSecure.get(`/foods?email=${user?.email}`);
       console.log('data:',res.data)
-      return res.data;
+      return res.data.data;
     },
     enabled: !!user?.email,
   });

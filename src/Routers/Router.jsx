@@ -18,6 +18,7 @@ import Customars from "./../Pages/Dashbord/Admin/Customars";
 import Dishes from "./../Pages/Dashbord/Admin/Dishes";
 import Payments from "./../Pages/Dashbord/User/Payments/Payments";
 import PackagePayment from "./../Pages/Dashbord/User/PackaagePayments/PackagePayment";
+import MyPayments from "./../Pages/Dashbord/User/MyPayments/MyPayments";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ export const router = createBrowserRouter([
       {
         path: "dishes",
         element: <Dishes />,
+      },
+      {
+        path: "myPayments",
+        element: <MyPayments />,
       },
     ],
   },
