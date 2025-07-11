@@ -27,7 +27,7 @@ const MealDetails = () => {
   const queryClient = useQueryClient();
   const { role } = useUserRole();
   const navigate = useNavigate();
-  console.log(role)
+  console.log(role);
 
   const [cartQuantity, setCartQuantity] = useState(1);
 
@@ -101,15 +101,15 @@ const MealDetails = () => {
                   </span>
                 </div>
                 <div className="absolute top-4 right-4">
-             {
-              role === 'subscriber' &&      (<button
-                    onClick={() => likeMutation.mutate(product._id)}
-                    className="flex items-center gap-1 text-red-500 hover:text-red-600"
-                  >
-                    {/* <Heart color="red" size={40} className="w-4 h-4" /> */}
-                    <FcLike className="hover:scale-120" size={60} />
-                  </button>)
-             }
+                  {role === "subscriber" && (
+                    <button
+                      onClick={() => likeMutation.mutate(product._id)}
+                      className="flex items-center gap-1 text-red-500 hover:text-red-600"
+                    >
+                      {/* <Heart color="red" size={40} className="w-4 h-4" /> */}
+                      <FcLike className="hover:scale-120" size={60} />
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -209,20 +209,30 @@ const MealDetails = () => {
 
                 {/* Buttons */}
                 <div className="space-y-3">
-                  <button
-                    onClick={() =>
-                      handlePay(
-                        product._id,
-                        product.price,
-                        totalPrice,
-                        product.productName
-                      )
-                    }
-                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <ShoppingCart className="w-5 h-5" />
-                    Buy Now
-                  </button>
+                  {role === "subscriber" ? (
+                    <button
+                      onClick={() =>
+                        handlePay(
+                          product._id,
+                          product.price,
+                          totalPrice,
+                          product.productName
+                        )
+                      }
+                      className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <ShoppingCart className="w-5 h-5" />
+                      Buy Now
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => navigate("/packages")}
+                      className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2 transition-colors"
+                    >
+                      <ShoppingCart className="w-5 h-5" />
+                      Subscribe to Buy
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
