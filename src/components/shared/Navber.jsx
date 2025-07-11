@@ -134,15 +134,11 @@ export default function Navbar() {
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link to="/profile">
-                      <User className="h-4 w-4 mr-2" /> Profile
+                    <Link to="/dashboard">
+                      <User className="h-4 w-4 mr-2" /> Dashboard
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/settings">
-                      <Settings className="h-4 w-4 mr-2" /> Settings
-                    </Link>
-                  </DropdownMenuItem>
+                 
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -234,15 +230,11 @@ export default function Navbar() {
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <Link to="/profile">
-                      <User className="h-4 w-4 mr-2" /> Profile
+                    <Link to="/dashboard">
+                      <User className="h-4 w-4 mr-2" /> Deshbord
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/settings">
-                      <Settings className="h-4 w-4 mr-2" /> Settings
-                    </Link>
-                  </DropdownMenuItem>
+               
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}

@@ -15,6 +15,7 @@ import {
 import Navbar from "./../../../components/shared/Navber";
 import Footer from "./../../../components/shared/footer";
 import { FcLike } from "react-icons/fc";
+import useUserRole from "./../../../Hooks/useUserRole";
 
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString();
@@ -24,7 +25,9 @@ const MealDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+  const { role } = useUserRole();
   const navigate = useNavigate();
+  console.log(role)
 
   const [cartQuantity, setCartQuantity] = useState(1);
 
@@ -98,13 +101,15 @@ const MealDetails = () => {
                   </span>
                 </div>
                 <div className="absolute top-4 right-4">
-                  <button
+             {
+              role === 'subscriber' &&      (<button
                     onClick={() => likeMutation.mutate(product._id)}
                     className="flex items-center gap-1 text-red-500 hover:text-red-600"
                   >
                     {/* <Heart color="red" size={40} className="w-4 h-4" /> */}
                     <FcLike className="hover:scale-120" size={60} />
-                  </button>
+                  </button>)
+             }
                 </div>
               </div>
 
