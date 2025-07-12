@@ -39,6 +39,8 @@ export default function DashboardLayout() {
     { icon: UserCheck, label: "MyPaymenst", path: "myPayments" },
     { icon: Wallet, label: "Packages", path: "packages" },
     { icon: Wallet, label: "AllPaymentStripe", path: "AllPaymentStripe" },
+    { icon: Plus, label: "AddUpcomingMeals", path: "AddUpcomingMeals" },
+    
   ];
   // Custom active class for NavLink
   const activeClass = "bg-orange-50 text-orange-600 hover:bg-orange-100";

@@ -19,7 +19,10 @@ import Dishes from "./../Pages/Dashbord/Admin/Dishes";
 import Payments from "./../Pages/Dashbord/User/Payments/Payments";
 import PackagePayment from "./../Pages/Dashbord/User/PackaagePayments/PackagePayment";
 import MyPayments from "./../Pages/Dashbord/User/MyPayments/MyPayments";
-import AllPaymentStripe from './../Pages/Dashbord/Admin/AllPaymentStripe';
+import AllPaymentStripe from "./../Pages/Dashbord/Admin/AllPaymentStripe";
+import AddUpcomingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AddUpcommingMeals";
+import AllUpcommingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AllUpcommingMeals";
+import UpcommingMealsDetails from "./../Pages/Dashbord/Admin/UpcomingMeals/UpcommingMealsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +47,14 @@ export const router = createBrowserRouter([
   {
     path: "packages",
     element: <PackagesHome />,
+  },
+  {
+    path: "/upcoming-meals",
+    element: <AllUpcommingMeals />,
+  },
+  {
+    path: "upcomingmealsdetails/:id",
+    element: <UpcommingMealsDetails />,
   },
   {
     path: "allMeals",
@@ -103,7 +114,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "AllPaymentStripe",
-        element: <AllPaymentStripe/>,
+        element: <AllPaymentStripe />,
+      },
+      {
+        path: "AddUpcomingMeals",
+        element: <AddUpcomingMeals />,
       },
     ],
   },
