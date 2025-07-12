@@ -16,8 +16,7 @@ import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import useUserRole from "./../../../../Hooks/useUserRole";
 import Navbar from "./../../../../components/shared/Navber";
 import Footer from "./../../../../components/shared/footer";
-import UpcommingMealsComments from "./UpcommingMealsComments";
-import Loader from './../../../Loader/Loader';
+import Loader from "./../../../Loader/Loader";
 
 const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString();
@@ -31,6 +30,7 @@ const UpcommingMealsDetails = () => {
   const navigate = useNavigate();
   const [cartQuantity, setCartQuantity] = useState(1);
 
+  // Fetch the meal details
   const {
     data: product,
     isLoading,
@@ -39,19 +39,26 @@ const UpcommingMealsDetails = () => {
     queryKey: ["upcomingMealDetails", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/upcoming-meals/${id}`);
-      console.log(res.data);
       return res.data;
     },
     enabled: !!id,
   });
 
+  // Mutation to like the meal
   const likeMutation = useMutation({
-    mutationFn: async (id) => {
-      const res = await axiosSecure.patch(`/upcoming-meals/${id}/likes`);
-      return res.data;
+    mutationFn: async (mealId) => {
+      const res = await axiosSecure.patch(`/upcoming-meals/${mealId}/likes`);
+      return res.data; // Expect backend to return updated meal object
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries(["upcomingMealDetails", id]);
+    onSuccess: (updatedMeal) => {
+      console.log("Updated meal from backend:", updatedMeal);
+      // Update cache with fresh likes count from backend response
+      queryClient.setQueryData(["upcomingMealDetails", id], (oldData) => ({
+        ...oldData,
+        likes: updatedMeal.likes,
+      }));
+
+      // Optionally update meal list cache if you have it
       queryClient.invalidateQueries(["upcomingMeals"]);
     },
   });
@@ -211,36 +218,10 @@ const UpcommingMealsDetails = () => {
             </div>
           </div>
 
-          <UpcommingMealsComments mealId={id} />
+          {/* Comments section can be enabled if you want */}
+          {/* <UpcommingMealsComments mealId={id} /> */}
 
-          {/* Extra Info */}
-          <div className="mt-8 bg-white rounded-2xl p-6 shadow-sm">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
-              Product Information
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-medium text-gray-700 mb-2">Details</h4>
-                <ul className="space-y-1 text-sm text-gray-600">
-                  <li>• Fresh and organic</li>
-                  <li>• Rich in vitamins</li>
-                  <li>• Premium quality</li>
-                  <li>• Carefully selected</li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-700 mb-2">
-                  Nutritional Benefits
-                </h4>
-                <ul className="space-y-1 text-sm text-gray-600">
-                  <li>• High in Vitamin C</li>
-                  <li>• Contains antioxidants</li>
-                  <li>• Low in calories</li>
-                  <li>• Good source of potassium</li>
-                </ul>
-              </div>
-            </div>
-          </div>
+       
         </div>
       </div>
       <Footer />
