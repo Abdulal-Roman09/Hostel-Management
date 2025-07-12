@@ -3,96 +3,97 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import useAuth from "./../../../../Hooks/useAuth";
 
-const CommentsSection = ({ mealId }) => {
+const ReviewsSection = ({ mealId }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
 
-  const [commentText, setCommentText] = useState("");
+  const [reviewText, setReviewText] = useState("");
 
-  // Fetch comments for the meal
+  // Fetch reviews for the meal
   const {
-    data: comments = [],
+    data: reviews = [],
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ["comments", mealId],
+    queryKey: ["reviews", mealId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/foods/${mealId}/comments`);
-      return res.data.data || [];
+      const res = await axiosSecure.get(`/foods/${mealId}/comments`); // backend still `/comments`
+      console.log(res.data);
+      return res.data.comments || [];
     },
     enabled: !!mealId,
   });
 
-  // Mutation to add new comment
-  const addCommentMutation = useMutation({
-    mutationFn: async (newComment) => {
-      return await axiosSecure.post(`/foods/${mealId}/comments`, newComment);
+  // Mutation to add new review
+  const addReviewMutation = useMutation({
+    mutationFn: async (newReview) => {
+      return await axiosSecure.post(`/foods/${mealId}/comments`, newReview); // backend still `/comments`
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments", mealId]);
-      setCommentText("");
+      queryClient.invalidateQueries(["reviews", mealId]);
+      setReviewText("");
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!commentText.trim()) return;
+    if (!reviewText.trim()) return;
 
-    const newComment = {
-      text: commentText,
+    const newReview = {
+      text: reviewText,
       userName: user?.displayName || "Anonymous",
       userEmail: user?.email || "",
       createdAt: new Date().toISOString(),
     };
 
-    addCommentMutation.mutate(newComment);
+    addReviewMutation.mutate(newReview);
   };
 
   return (
     <div className="mt-10 bg-white rounded-lg p-6 shadow max-w-4xl mx-auto">
-      <h3 className="text-xl font-semibold mb-4">Comments</h3>
-
-      {/* Comment Form */}
+      {/* Review Form */}
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={3}
           className="w-full border rounded p-3 resize-none focus:outline-orange-500"
-          placeholder="Write your comment here..."
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
+          placeholder="Write your review here..."
+          value={reviewText}
+          onChange={(e) => setReviewText(e.target.value)}
           required
         />
         <button
           type="submit"
-          disabled={addCommentMutation.isLoading}
+          disabled={addReviewMutation.isLoading}
           className="mt-2 bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
         >
-          {addCommentMutation.isLoading ? "Posting..." : "Post Comment"}
+          {addReviewMutation.isLoading ? "Posting..." : "Post Review"}
         </button>
       </form>
+      <div className="border-1 border-amber-100 "></div>
+      <h3 className="text-xl font-semibold mb-4 text-orange-400 text-center">
+        Reviews : {reviews.length}
+      </h3>
 
-      {/* Comments List */}
+      {/* Reviews List */}
       {isLoading ? (
-        <p>Loading comments...</p>
+        <p>Loading reviews...</p>
       ) : isError ? (
-        <p className="text-red-600">Failed to load comments.</p>
-      ) : comments.length === 0 ? (
-        <p className="text-gray-600">
-          No comments yet. Be the first to comment!
-        </p>
+        <p className="text-red-600">Failed to load reviews.</p>
+      ) : reviews.length === 0 ? (
+        <p className="text-gray-600">No reviews yet. Be the first to review!</p>
       ) : (
         <ul className="space-y-4">
-          {comments.map((comment) => (
+          {reviews.map((review) => (
             <li
-              key={comment._id || comment.createdAt}
+              key={review._id || review.createdAt}
               className="border rounded p-4 bg-orange-50"
             >
-              <p className="font-semibold">{comment.userName || "Anonymous"}</p>
+              <p className="font-semibold">{review.userName || "Anonymous"}</p>
               <p className="text-sm text-gray-600 mb-2">
-                {new Date(comment.createdAt).toLocaleString()}
+                {new Date(review.createdAt).toLocaleString()}
               </p>
-              <p>{comment.text}</p>
+              <p>{review.text}</p>
             </li>
           ))}
         </ul>
@@ -101,4 +102,4 @@ const CommentsSection = ({ mealId }) => {
   );
 };
 
-export default CommentsSection;
+export default ReviewsSection;

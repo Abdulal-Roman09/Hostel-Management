@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const useUserRole = () => {
   const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
-  console.log(user);
+  // console.log(user);
 
   const {
     data: roleData,
@@ -18,7 +18,7 @@ const useUserRole = () => {
     enabled: !!user?.email && !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`user/${user.email}/role`);
-      console.log(res);
+      // console.log(res);
       return res.data.role;
     },
   });

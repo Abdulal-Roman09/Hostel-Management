@@ -34,6 +34,7 @@ const CategoryMeals = () => {
         limit: 10,
       });
       const res = await axiosSecure.get(`/foods?${queryParams.toString()}`);
+      console.log(res.data)
       return res.data; // { data: [...], total }
     },
     getNextPageParam: (lastPage, allPages) => {

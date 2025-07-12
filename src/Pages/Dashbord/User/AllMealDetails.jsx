@@ -29,7 +29,7 @@ const MealDetails = () => {
   const queryClient = useQueryClient();
   const { role } = useUserRole();
   const navigate = useNavigate();
-  console.log(role);
+  // console.log(role);
 
   const [cartQuantity, setCartQuantity] = useState(1);
 
@@ -41,8 +41,8 @@ const MealDetails = () => {
     queryKey: ["mealDetails", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/foods/${id}`);
-      console.log("API response:", res.data);
-      return res.data;
+      // console.log("API response:", res.data.data);
+      return res.data.data;
     },
     enabled: !!id,
   });
@@ -249,7 +249,7 @@ const MealDetails = () => {
               </div>
             </div>
           </div>
-          <CommentsSection/>
+          <CommentsSection mealId={id}/>
 
           {/* Additional Info */}
           <div className="mt-8 bg-white rounded-2xl p-6 shadow-sm">
