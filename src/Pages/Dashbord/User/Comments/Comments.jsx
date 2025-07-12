@@ -10,7 +10,7 @@ const ReviewsSection = ({ mealId }) => {
 
   const [reviewText, setReviewText] = useState("");
 
-  // Fetch reviews for the meal
+  // Fetch reviews for this meal
   const {
     data: reviews = [],
     isLoading,
@@ -18,30 +18,43 @@ const ReviewsSection = ({ mealId }) => {
   } = useQuery({
     queryKey: ["reviews", mealId],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/foods/${mealId}/comments`); // backend still `/comments`
-      console.log(res.data);
+      const res = await axiosSecure.get(`/foods/${mealId}/comments`);
+      console.log("Fetched reviews:", res.data);
       return res.data.comments || [];
     },
     enabled: !!mealId,
   });
 
-  // Mutation to add new review
+  // Mutation to add review (two POSTs simultaneously)
   const addReviewMutation = useMutation({
     mutationFn: async (newReview) => {
-      return await axiosSecure.post(`/foods/${mealId}/comments`, newReview); // backend still `/comments`
+      console.log("Posting review data:", newReview);
+      const [res1, res2] = await Promise.all([
+        axiosSecure.post(`/foods/${mealId}/comments`, newReview),
+        axiosSecure.post(`/reviews`, newReview),
+      ]);
+      console.log("/foods response:", res1.data);
+      console.log("/reviews response:", res2.data);
+      return { res1: res1.data, res2: res2.data };
     },
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", mealId]);
       setReviewText("");
     },
+    onError: (error) => {
+      console.error("Error posting review:", error.response?.data || error.message);
+      alert("Review post করতে সমস্যা হয়েছে। দয়া করে পরে আবার চেষ্টা করুন।");
+    },
   });
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!reviewText.trim()) return;
 
     const newReview = {
-      text: reviewText,
+      mealId: mealId,              // এখানে mealId দেয়া জরুরি
+      text: reviewText.trim(),
       userName: user?.displayName || "Anonymous",
       userEmail: user?.email || "",
       createdAt: new Date().toISOString(),
@@ -52,7 +65,6 @@ const ReviewsSection = ({ mealId }) => {
 
   return (
     <div className="mt-10 bg-white rounded-lg p-6 shadow max-w-4xl mx-auto">
-      {/* Review Form */}
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={3}
@@ -70,12 +82,11 @@ const ReviewsSection = ({ mealId }) => {
           {addReviewMutation.isLoading ? "Posting..." : "Post Review"}
         </button>
       </form>
-      <div className="border-1 border-amber-100 "></div>
+
       <h3 className="text-xl font-semibold mb-4 text-orange-400 text-center">
         Reviews : {reviews.length}
       </h3>
 
-      {/* Reviews List */}
       {isLoading ? (
         <p>Loading reviews...</p>
       ) : isError ? (
