@@ -19,6 +19,7 @@ import Dishes from "./../Pages/Dashbord/Admin/Dishes";
 import Payments from "./../Pages/Dashbord/User/Payments/Payments";
 import PackagePayment from "./../Pages/Dashbord/User/PackaagePayments/PackagePayment";
 import MyPayments from "./../Pages/Dashbord/User/MyPayments/MyPayments";
+import AllPaymentStripe from './../Pages/Dashbord/Admin/AllPaymentStripe';
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: "myPayments",
         element: <MyPayments />,
+      },
+      {
+        path: "AllPaymentStripe",
+        element: <AllPaymentStripe/>,
       },
     ],
   },

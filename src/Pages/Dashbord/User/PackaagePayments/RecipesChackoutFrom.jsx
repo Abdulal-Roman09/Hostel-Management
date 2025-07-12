@@ -37,7 +37,14 @@ const RecipesChackoutFrom = ({
       // Step 1: Create payment intent
       const { data: clientSecretData } = await axiosSecure.post(
         "/create-payment-intent",
-        { amount: totalPrice }
+        {
+          amount: totalPrice,
+          userId: user._id,
+          userEmail: user.email,
+          productId: id,
+          productName,
+          sellerEmail: addedByEmail,
+        }
       );
       const clientSecret = clientSecretData.clientSecret;
       const cardElement = elements.getElement(CardElement);
