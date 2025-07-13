@@ -40,10 +40,14 @@ const ReviewsSection = ({ mealId }) => {
     onSuccess: () => {
       queryClient.invalidateQueries(["reviews", mealId]);
       setReviewText("");
+      toast.success("✅ Review posted successfully!");
     },
     onError: (error) => {
-      console.error("Error posting review:", error.response?.data || error.message);
-      alert("Review post করতে সমস্যা হয়েছে। দয়া করে পরে আবার চেষ্টা করুন।");
+      console.error(
+        "Error posting review:",
+        error.response?.data || error.message
+      );
+      toast.error("❌ Review post Error!");
     },
   });
 
@@ -53,10 +57,11 @@ const ReviewsSection = ({ mealId }) => {
     if (!reviewText.trim()) return;
 
     const newReview = {
-      mealId: mealId,              // এখানে mealId দেয়া জরুরি
+      mealId: mealId,
       text: reviewText.trim(),
       userName: user?.displayName || "Anonymous",
       userEmail: user?.email || "",
+      userPhoto: user?.photoURL,
       createdAt: new Date().toISOString(),
     };
 

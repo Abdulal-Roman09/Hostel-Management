@@ -23,6 +23,7 @@ import AllPaymentStripe from "./../Pages/Dashbord/Admin/AllPaymentStripe";
 import AddUpcomingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AddUpcommingMeals";
 import AllUpcommingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AllUpcommingMeals";
 import UpcommingMealsDetails from "./../Pages/Dashbord/Admin/UpcomingMeals/UpcommingMealsDetails";
+import MyReviews from "./../Pages/Dashbord/User/MyReviews/MyReviews";
 
 export const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ export const router = createBrowserRouter([
       {
         path: "AddUpcomingMeals",
         element: <AddUpcomingMeals />,
+      },
+      {
+        path: "reviews",
+        element: <MyReviews />,
       },
     ],
   },
