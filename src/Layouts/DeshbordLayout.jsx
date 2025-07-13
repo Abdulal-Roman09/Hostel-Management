@@ -22,8 +22,10 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Logo from "./../components/shared/Logo";
 import useAuth from "./../Hooks/useAuth";
+import useUserRole from "./../Hooks/useUserRole";
 
 export default function DashboardLayout() {
+  const { role } = useUserRole();
   const { user } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -34,6 +36,7 @@ export default function DashboardLayout() {
 
   const renderLinks = () => (
     <>
+    {/* admin routs */}
       <li>
         <NavLink
           to="/dashboard"
@@ -47,6 +50,7 @@ export default function DashboardLayout() {
           <span>Dashboard</span>
         </NavLink>
       </li>
+
       <li>
         <NavLink
           to="addFood"
@@ -60,21 +64,19 @@ export default function DashboardLayout() {
           <span>Add Food</span>
         </NavLink>
       </li>
-      {user && (
-        <li>
-          <NavLink
-            to="MyOrders"
-            className={({ isActive }) =>
-              `${
-                isActive ? activeClass : inactiveClass
-              } w-full h-10 px-3 rounded flex items-center gap-2`
-            }
-          >
-            <ReceiptText className="w-4 h-4" />
-            <span>My Orders</span>
-          </NavLink>
-        </li>
-      )}
+      <li>
+        <NavLink
+          to="AllPaymentStripe"
+          className={({ isActive }) =>
+            `${
+              isActive ? activeClass : inactiveClass
+            } w-full h-10 px-3 rounded flex items-center gap-2`
+          }
+        >
+          <DollarSign className="w-4 h-4" />
+          <span>All Payment Stripe</span>
+        </NavLink>
+      </li>
       <li>
         <NavLink
           to="customers"
@@ -116,6 +118,20 @@ export default function DashboardLayout() {
       </li>
       <li>
         <NavLink
+          to="AddUpcomingMeals"
+          className={({ isActive }) =>
+            `${
+              isActive ? activeClass : inactiveClass
+            } w-full h-10 px-3 rounded flex items-center gap-2`
+          }
+        >
+          <CalendarPlus className="w-4 h-4" />
+          <span>Add Upcoming Meals</span>
+        </NavLink>
+      </li>
+      {/* subcriber routs */}
+      <li>
+        <NavLink
           to="myPayments"
           className={({ isActive }) =>
             `${
@@ -142,32 +158,6 @@ export default function DashboardLayout() {
       </li>
       <li>
         <NavLink
-          to="AllPaymentStripe"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <DollarSign className="w-4 h-4" />
-          <span>All Payment Stripe</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="AddUpcomingMeals"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <CalendarPlus className="w-4 h-4" />
-          <span>Add Upcoming Meals</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to="reviews"
           className={({ isActive }) =>
             `${
@@ -181,15 +171,15 @@ export default function DashboardLayout() {
       </li>
       <li>
         <NavLink
-          to="ridersList"
+          to="MyOrders"
           className={({ isActive }) =>
             `${
               isActive ? activeClass : inactiveClass
             } w-full h-10 px-3 rounded flex items-center gap-2`
           }
         >
-          <Bike className="w-4 h-4" />
-          <span>Riders List</span>
+          <ReceiptText className="w-4 h-4" />
+          <span>My Orders</span>
         </NavLink>
       </li>
     </>

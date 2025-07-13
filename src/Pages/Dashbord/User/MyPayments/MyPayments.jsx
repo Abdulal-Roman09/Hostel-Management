@@ -16,6 +16,7 @@ const MyPayments = () => {
     queryKey: ["myPayments", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/myPayments/${user?.email}`);
+      console.log(res.data.data)
       return res.data.data;
     },
     enabled: !!user?.email,
