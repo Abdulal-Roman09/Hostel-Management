@@ -233,6 +233,10 @@ export default function Navbar() {
                     <Link to="/dashboard">
                       <User className="h-4 w-4 mr-2" /> Deshbord
                     </Link>
+                  </DropdownMenuItem><DropdownMenuItem asChild>
+                    <Link to="/profile">
+                      <User className="h-4 w-4 mr-2" /> Profile
+                    </Link>
                   </DropdownMenuItem>
                
                   <DropdownMenuSeparator />

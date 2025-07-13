@@ -5,6 +5,7 @@ import ErrorPage from "./../Pages/Error/ErrorPage";
 import LoginFrom from "./../components/Froms/LoginFrom";
 import RegisterForm from "../components/Froms/RegisterFrom";
 import DeshbordLayout from "../Layouts/DeshbordLayout";
+
 import MyOrder from "./../Pages/Dashbord/User/MyOrder";
 import PrivateRoute from "./../Routes/PrivateRoute";
 import Packages from "../Pages/Dashbord/User/Packages";
@@ -24,6 +25,7 @@ import AddUpcomingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AddUpcommi
 import AllUpcommingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AllUpcommingMeals";
 import UpcommingMealsDetails from "./../Pages/Dashbord/Admin/UpcomingMeals/UpcommingMealsDetails";
 import MyReviews from "./../Pages/Dashbord/User/MyReviews/MyReviews";
+import Profile from "./../components/shared/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +46,10 @@ export const router = createBrowserRouter([
   {
     path: "register",
     Component: RegisterForm,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
   },
   {
     path: "packages",
