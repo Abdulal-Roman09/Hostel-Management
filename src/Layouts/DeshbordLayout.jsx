@@ -42,7 +42,7 @@ export default function DashboardLayout() {
           {" "}
           <li>
             <NavLink
-              to="dashboard"
+              to="adminProile"
               className={({ isActive }) =>
                 `${
                   isActive ? activeClass : inactiveClass
@@ -50,7 +50,7 @@ export default function DashboardLayout() {
               }
             >
               <LayoutDashboard className="w-4 h-4" />
-              <span>Dashboard Home</span>
+              <span>Admin Profile</span>
             </NavLink>
           </li>
           <li>
@@ -118,6 +118,20 @@ export default function DashboardLayout() {
               <span>Dishes</span>
             </NavLink>
           </li>
+           <li>
+            <NavLink
+              to="PendingRequests"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <ChefHat className="w-4 h-4" />
+              <span>PendingRequests</span>
+            </NavLink>
+          </li>
+          
           <li>
             <NavLink
               to="AddUpcomingMeals"
@@ -137,6 +151,19 @@ export default function DashboardLayout() {
       {/* subcriber routs */}
       {user && (
         <>
+          <li>
+            <NavLink
+              to="profile"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <Package className="w-4 h-4" />
+              <span>Profile</span>
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="packages"

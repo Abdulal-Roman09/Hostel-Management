@@ -80,7 +80,7 @@ const RecipesChackoutFrom = ({
           transaction: {
             id: paymentResult.paymentIntent.id,
             date: new Date().toISOString(),
-            status: paymentResult.paymentIntent.status,
+            status: 'pending',
           },
           seller: {
             name: addedByName || "N/A",

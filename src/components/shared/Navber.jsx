@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import {
   Menu,
   Home,
-  Users,
   CookingPot,
   Bed,
   Dock,
   Hamburger,
-  Settings,
   LogOut,
   User,
 } from "lucide-react";
@@ -235,7 +233,7 @@ export default function Navbar() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <Link to="/dashboard">
-                      <User className="h-4 w-4 mr-2" /> Deshbord
+                      <Dock className="h-4 w-4 mr-2" /> Deshbord
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>

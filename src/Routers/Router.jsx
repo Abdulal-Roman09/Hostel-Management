@@ -26,7 +26,8 @@ import AllUpcommingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AllUpcomm
 import UpcommingMealsDetails from "./../Pages/Dashbord/Admin/UpcomingMeals/UpcommingMealsDetails";
 import MyReviews from "./../Pages/Dashbord/User/MyReviews/MyReviews";
 import Profile from "./../components/shared/Profile";
-import DashboardPage from "./../Pages/Dashbord/Admin/AdminDeshbord/DashboardPage";
+import AdminProfile from "./../Pages/Dashbord/Profile/AdminProfile";
+import PendingRequests from "./../Pages/Dashbord/Admin/PendingRequests/PendingRequests";
 
 export const router = createBrowserRouter([
   {
@@ -134,8 +135,16 @@ export const router = createBrowserRouter([
         element: <MyReviews />,
       },
       {
-        path: "dashboard",
-        element: <DashboardPage />,
+        path: "adminProile",
+        element: <AdminProfile />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+      {
+        path: "PendingRequests",
+        element: <PendingRequests />,
       },
     ],
   },

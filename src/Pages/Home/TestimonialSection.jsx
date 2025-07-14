@@ -1,7 +1,7 @@
 import React from "react";
 import { Star } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Image from "../../assets/tastimonialImage.png";
+import Image from "../../assets/HKJ-1627642170.jpeg";
 import Dot from "./Dot";
 
 const TestimonialSection = () => {

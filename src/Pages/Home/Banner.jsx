@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Calendar, Star } from "lucide-react";
-import Image from "../../assets/banner3.jpeg"; 
+import Image from "../../assets/banner.jpeg"; 
 import Dot from "./Dot";
 
 export default function Banner() {
