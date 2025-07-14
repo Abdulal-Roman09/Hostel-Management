@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import Logo from "./../components/shared/Logo";
 import useAuth from "./../Hooks/useAuth";
 import useUserRole from "./../Hooks/useUserRole";
+import AdminProfile from './../Pages/Dashbord/Profile/AdminProfile';
 
 export default function DashboardLayout() {
   const { role } = useUserRole();
@@ -359,6 +360,7 @@ export default function DashboardLayout() {
           </div>
         </header>
         <div className="px-1 flex-1">
+         
           <Outlet />
         </div>
       </div>

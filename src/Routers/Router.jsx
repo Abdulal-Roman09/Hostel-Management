@@ -28,6 +28,9 @@ import MyReviews from "./../Pages/Dashbord/User/MyReviews/MyReviews";
 import Profile from "./../components/shared/Profile";
 import AdminProfile from "./../Pages/Dashbord/Profile/AdminProfile";
 import PendingRequests from "./../Pages/Dashbord/Admin/PendingRequests/PendingRequests";
+import Forbidden from "./../components/shared/Forbidden";
+import AdminRoute from "./../Routes/AdminRoutes";
+import SubscriberRoute from "./../Routes/SubscriberRoute";
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +51,10 @@ export const router = createBrowserRouter([
   {
     path: "register",
     Component: RegisterForm,
+  },
+  {
+    path: "forbidden",
+    element: <Forbidden />,
   },
   {
     path: "profile",
@@ -77,7 +84,6 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
-
   {
     path: "payments",
     element: <Payments />,
@@ -96,7 +102,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "MyOrders",
-        element: <MyOrder />,
+        element: (
+          <SubscriberRoute>
+            <MyOrder />
+          </SubscriberRoute>
+        ),
       },
       {
         path: "packages",
@@ -104,39 +114,79 @@ export const router = createBrowserRouter([
       },
       {
         path: "addFood",
-        element: <AddFood></AddFood>,
+        element: (
+          <AdminRoute>
+            <AddFood />
+          </AdminRoute>
+        ),
       },
       {
         path: "myCreationList",
-        element: <MyCreationList />,
+        element: (
+          <AdminRoute>
+            <MyCreationList />
+          </AdminRoute>
+        ),
       },
       {
         path: "customers",
-        element: <Customars />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <Customars />
+          </AdminRoute>
+        ),
       },
       {
         path: "dishes",
-        element: <Dishes />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <Dishes />
+          </AdminRoute>
+        ),
       },
       {
         path: "myPayments",
-        element: <MyPayments />,
+        element: (
+          <SubscriberRoute>
+            <MyPayments />
+          </SubscriberRoute>
+        ),
       },
       {
         path: "AllPaymentStripe",
-        element: <AllPaymentStripe />,
+        element: (
+          <AdminRoute>
+            <AllPaymentStripe />
+          </AdminRoute>
+        ),
       },
       {
         path: "AddUpcomingMeals",
-        element: <AddUpcomingMeals />,
+        element: (
+          <AdminRoute>
+            {" "}
+            <AddUpcomingMeals />
+          </AdminRoute>
+        ),
       },
       {
         path: "reviews",
-        element: <MyReviews />,
+        element: (
+          <SubscriberRoute>
+            {" "}
+            <MyReviews />
+          </SubscriberRoute>
+        ),
       },
       {
         path: "adminProile",
-        element: <AdminProfile />,
+        element: (
+          <AdminRoute>
+            <AdminProfile />
+          </AdminRoute>
+        ),
       },
       {
         path: "profile",
@@ -144,7 +194,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "PendingRequests",
-        element: <PendingRequests />,
+        element: (
+          <AdminRoute>
+            <PendingRequests />
+          </AdminRoute>
+        ),
       },
     ],
   },
