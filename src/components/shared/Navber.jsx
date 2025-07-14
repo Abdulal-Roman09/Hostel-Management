@@ -29,6 +29,7 @@ import {
 import Logo from "./Logo";
 import useAuth from "./../../Hooks/useAuth";
 import NotificationPanel from "./NotificationPanel";
+import { DropdownMenuDemo } from "./DropdownMenuDemo";
 
 export default function Navbar() {
   const { user, logOut } = useAuth();
@@ -110,7 +111,6 @@ export default function Navbar() {
             {isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                 
                   <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
                     <Avatar className="h-8 w-8">
                       <AvatarImage
@@ -201,56 +201,60 @@ export default function Navbar() {
 
           {/* DESKTOP: Avatar or Login/Register */}
           <div className="hidden md:flex items-center gap-3">
-            {isLoggedIn ? (<>
- <NotificationPanel />
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  
-                  <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src={user?.photoURL || "/placeholder.svg"}
-                        alt={user?.displayName || "User"}
-                        onError={(e) => {
-                          e.currentTarget.src = "/placeholder.svg";
-                        }}
-                      />
-                      <AvatarFallback>
-                        {user?.displayName?.charAt(0) || (
-                          <User className="h-4 w-4" />
-                        )}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end">
-                  <div className="p-2">
-                    <p className="font-medium">{user?.displayName}</p>
-                    <p className="text-sm text-muted-foreground truncate">
-                      {user?.email}
-                    </p>
-                  </div>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link to="/dashboard">
-                      <Dock className="h-4 w-4 mr-2" /> Deshbord
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link to="/profile">
-                      <User className="h-4 w-4 mr-2" /> Profile
-                    </Link>
-                  </DropdownMenuItem>
+            {isLoggedIn ? (
+              <>
+                {/* <NotificationPanel /> */}
+                <DropdownMenuDemo />
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="h-8 w-8 rounded-full p-0"
+                    >
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage
+                          src={user?.photoURL || "/placeholder.svg"}
+                          alt={user?.displayName || "User"}
+                          onError={(e) => {
+                            e.currentTarget.src = "/placeholder.svg";
+                          }}
+                        />
+                        <AvatarFallback>
+                          {user?.displayName?.charAt(0) || (
+                            <User className="h-4 w-4" />
+                          )}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56" align="end">
+                    <div className="p-2">
+                      <p className="font-medium">{user?.displayName}</p>
+                      <p className="text-sm text-muted-foreground truncate">
+                        {user?.email}
+                      </p>
+                    </div>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link to="/dashboard">
+                        <Dock className="h-4 w-4 mr-2" /> Deshbord
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile">
+                        <User className="h-4 w-4 mr-2" /> Profile
+                      </Link>
+                    </DropdownMenuItem>
 
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    onClick={handleLogout}
-                    className="text-red-600"
-                  >
-                    <LogOut className="h-4 w-4 mr-2" /> Logout
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem
+                      onClick={handleLogout}
+                      className="text-red-600"
+                    >
+                      <LogOut className="h-4 w-4 mr-2" /> Logout
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </>
             ) : (
               <>

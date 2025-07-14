@@ -55,12 +55,11 @@ export default function NotificationPanel() {
       </DialogTrigger>
 
       <DialogContent
-        className="w-[360px] p-0 rounded-md border shadow-lg max-h-[70vh] overflow-y-auto bg-background backdrop-blur z-[100]
-"
+        className="w-[360px] p-0 rounded-md border shadow-lg max-h-[70vh] overflow-y-auto bg-background backdrop-blur z-[100]"
         style={{
           position: "fixed",
-          right: "1rem",
-          top: "4rem", // adjust for navbar height
+          right: "20px", // Updated to 20px
+          top: "100px", // Updated to 100px
         }}
       >
         <div className="p-4">
