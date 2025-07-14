@@ -36,152 +36,166 @@ export default function DashboardLayout() {
 
   const renderLinks = () => (
     <>
-    {/* admin routs */}
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <LayoutDashboard className="w-4 h-4" />
-          <span>Dashboard</span>
-        </NavLink>
-      </li>
+      {/* admin routs */}
+      {role === "admin" && (
+        <>
+          {" "}
+          <li>
+            <NavLink
+              to="dashboard"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <LayoutDashboard className="w-4 h-4" />
+              <span>Dashboard Home</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="addFood"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <Utensils className="w-4 h-4" />
+              <span>Add Food</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="AllPaymentStripe"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <DollarSign className="w-4 h-4" />
+              <span>All Payment Stripe</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="customers"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <Users className="w-4 h-4" />
+              <span>Customers/makeAdmin</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="myCreationList"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <ListOrdered className="w-4 h-4" />
+              <span>My Creation List</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="dishes"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <ChefHat className="w-4 h-4" />
+              <span>Dishes</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="AddUpcomingMeals"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <CalendarPlus className="w-4 h-4" />
+              <span>Add Upcoming Meals</span>
+            </NavLink>
+          </li>
+        </>
+      )}
 
-      <li>
-        <NavLink
-          to="addFood"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <Utensils className="w-4 h-4" />
-          <span>Add Food</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="AllPaymentStripe"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <DollarSign className="w-4 h-4" />
-          <span>All Payment Stripe</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="customers"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <Users className="w-4 h-4" />
-          <span>Customers</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="myCreationList"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <ListOrdered className="w-4 h-4" />
-          <span>My Creation List</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="dishes"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <ChefHat className="w-4 h-4" />
-          <span>Dishes</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="AddUpcomingMeals"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <CalendarPlus className="w-4 h-4" />
-          <span>Add Upcoming Meals</span>
-        </NavLink>
-      </li>
       {/* subcriber routs */}
-      <li>
-        <NavLink
-          to="myPayments"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <CreditCard className="w-4 h-4" />
-          <span>My Payments</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="packages"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <Package className="w-4 h-4" />
-          <span>Packages</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="reviews"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <MessageCircle className="w-4 h-4" />
-          <span>My Reviews</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="MyOrders"
-          className={({ isActive }) =>
-            `${
-              isActive ? activeClass : inactiveClass
-            } w-full h-10 px-3 rounded flex items-center gap-2`
-          }
-        >
-          <ReceiptText className="w-4 h-4" />
-          <span>My Orders</span>
-        </NavLink>
-      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink
+              to="packages"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <Package className="w-4 h-4" />
+              <span>Packages</span>
+            </NavLink>
+          </li>
+        </>
+      )}
+      {role === "subscriber" && (
+        <>
+          {" "}
+          <li>
+            <NavLink
+              to="myPayments"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <CreditCard className="w-4 h-4" />
+              <span>My Payments</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="reviews"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <MessageCircle className="w-4 h-4" />
+              <span>My Reviews</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="MyOrders"
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <ReceiptText className="w-4 h-4" />
+              <span>My Orders</span>
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 

@@ -26,6 +26,7 @@ import AllUpcommingMeals from "./../Pages/Dashbord/Admin/UpcomingMeals/AllUpcomm
 import UpcommingMealsDetails from "./../Pages/Dashbord/Admin/UpcomingMeals/UpcommingMealsDetails";
 import MyReviews from "./../Pages/Dashbord/User/MyReviews/MyReviews";
 import Profile from "./../components/shared/Profile";
+import DashboardPage from "./../Pages/Dashbord/Admin/AdminDeshbord/DashboardPage";
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +76,7 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
   },
+
   {
     path: "payments",
     element: <Payments />,
@@ -130,6 +132,10 @@ export const router = createBrowserRouter([
       {
         path: "reviews",
         element: <MyReviews />,
+      },
+      {
+        path: "dashboard",
+        element: <DashboardPage />,
       },
     ],
   },

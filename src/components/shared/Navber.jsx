@@ -30,6 +30,7 @@ import {
 
 import Logo from "./Logo";
 import useAuth from "./../../Hooks/useAuth";
+import NotificationPanel from "./NotificationPanel";
 
 export default function Navbar() {
   const { user, logOut } = useAuth();
@@ -111,6 +112,7 @@ export default function Navbar() {
             {isLoggedIn ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
+                 
                   <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
                     <Avatar className="h-8 w-8">
                       <AvatarImage
@@ -138,7 +140,7 @@ export default function Navbar() {
                       <User className="h-4 w-4 mr-2" /> Dashboard
                     </Link>
                   </DropdownMenuItem>
-                 
+
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -201,9 +203,11 @@ export default function Navbar() {
 
           {/* DESKTOP: Avatar or Login/Register */}
           <div className="hidden md:flex items-center gap-3">
-            {isLoggedIn ? (
+            {isLoggedIn ? (<>
+ <NotificationPanel />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
+                  
                   <Button variant="ghost" className="h-8 w-8 rounded-full p-0">
                     <Avatar className="h-8 w-8">
                       <AvatarImage
@@ -233,12 +237,13 @@ export default function Navbar() {
                     <Link to="/dashboard">
                       <User className="h-4 w-4 mr-2" /> Deshbord
                     </Link>
-                  </DropdownMenuItem><DropdownMenuItem asChild>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link to="/profile">
                       <User className="h-4 w-4 mr-2" /> Profile
                     </Link>
                   </DropdownMenuItem>
-               
+
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     onClick={handleLogout}
@@ -248,6 +253,7 @@ export default function Navbar() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              </>
             ) : (
               <>
                 <Link to="/login">

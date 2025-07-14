@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -110,12 +109,21 @@
   --sidebar-ring: oklch(0.646 0.222 41.116);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+@keyframes slideDownRight {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
