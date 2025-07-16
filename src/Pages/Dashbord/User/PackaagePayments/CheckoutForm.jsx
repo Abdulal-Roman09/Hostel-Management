@@ -12,7 +12,7 @@ const CheckoutForm = ({ amount, title }) => {
   const elements = useElements();
   const queryClient = useQueryClient();
   const { user } = useAuth();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState(false);
@@ -48,7 +48,12 @@ const CheckoutForm = ({ amount, title }) => {
       // Step 1: Create payment intent
       const { data: clientSecretData } = await axiosSecure.post(
         "/create-payment-intent",
-        { amount }
+        {
+          amount, 
+          userEmail: user?.email,
+          userName: user?.displayName,
+          package: title,
+        }
       );
       const clientSecret = clientSecretData.clientSecret;
       const cardElement = elements.getElement(CardElement);
@@ -73,8 +78,7 @@ const CheckoutForm = ({ amount, title }) => {
           role: "subscriber",
           packages: title, // example: 'Bronze', 'Gold'
         });
-        navigate('/allMeals')
-        
+        navigate("/allMeals");
       }
     } catch (err) {
       setError(err.message || "Something went wrong.");

@@ -31,6 +31,9 @@ const UpcommingHome = () => {
 
       <Dot />
       <div className="bg-orange-50">
+        <div className="flex justify-center">
+            <p className="text-xl bg-orange-200 w-fit px-5 py-2 rounded-full container">UpcommingMeals</p>
+        </div>
         <div className="container mx-auto px-4 py-10">
           {/* Meals Grid */}
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

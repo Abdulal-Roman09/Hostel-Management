@@ -31,12 +31,7 @@ const slides = [
     src: "https://i.ibb.co/35dzxrQr/nick-bratanek-h9-Yj-JSTy-Ga-Y-unsplash.jpg",
     title: "Biryani & More",
     price: "৳220",
-  },
-  {
-    src: "/images/meal3.jpg",
-    title: "Delicious Mixed Platters",
-    price: "৳200",
-  },
+  }
 ];
 
 const ImageSlider = () => {

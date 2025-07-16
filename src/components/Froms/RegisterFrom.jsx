@@ -117,10 +117,7 @@ export default function RegisterForm() {
               type="email"
               {...register("email", {
                 required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                  message: "Invalid email address",
-                },
+               
               })}
               className="w-full border px-3 py-2 rounded"
               placeholder="Enter your email"
