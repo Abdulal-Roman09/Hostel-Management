@@ -7,7 +7,7 @@ import Dot from "./Dot";
 
 export default function Banner() {
   return (
-    <div className="h-fit py-10 bg-gradient-to-br from-orange-50 via-white to-red-50">
+    <div className="h-fit py-10  bg-orange-50 ">
       {/* Hero Section */}
       {/* Decorative random dots across the full page */}
       <Dot />
