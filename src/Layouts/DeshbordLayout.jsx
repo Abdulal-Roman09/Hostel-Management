@@ -16,6 +16,8 @@ import {
   LogOut,
   Menu as MenuIcon,
   X as CloseIcon,
+  Home,
+  HomeIcon,
 } from "lucide-react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -40,6 +42,17 @@ export default function DashboardLayout() {
       {/* Admin routes */}
       {role === "admin" && (
         <>
+           <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <HomeIcon className="w-4 h-4" />
+              <span>Home</span>
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="adminProile"
@@ -134,6 +147,17 @@ export default function DashboardLayout() {
       {/* Subscriber routes */}
       {user && (
         <>
+           <li>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) =>
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <HomeIcon className="w-4 h-4" />
+              <span>Home</span>
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="profile"
@@ -145,6 +169,7 @@ export default function DashboardLayout() {
               <span>Profile</span>
             </NavLink>
           </li>
+         
           <li>
             <NavLink
               to="packages"
@@ -160,6 +185,7 @@ export default function DashboardLayout() {
       )}
       {role === "subscriber" && (
         <>
+        
           <li>
             <NavLink
               to="myPayments"
