@@ -10,10 +10,10 @@ const SingleAllMeals = forwardRef(({ product }, ref) => {
   return (
     <div
       ref={ref}
-      className="bg-white rounded-xl border border-orange-200 overflow-hidden shadow-sm transition-transform hover:scale-[1.02]"
+      className="bg-white dark:bg-gray-800 rounded-xl border border-orange-200 dark:border-gray-700 overflow-hidden shadow-sm transition-transform hover:scale-[1.02]"
     >
       {/* Image */}
-      <div className="relative h-48 bg-gray-200">
+      <div className="relative h-48 bg-gray-200 dark:bg-gray-800">
         <img
           src={product.image || "/placeholder.svg"}
           alt={product.productName}
@@ -25,7 +25,7 @@ const SingleAllMeals = forwardRef(({ product }, ref) => {
           </span>
         </div>
         <div className="absolute top-3 right-3">
-          <span className="bg-white text-orange-600 px-2 py-1 rounded-full text-xs font-medium border border-orange-200">
+          <span className="bg-white dark:bg-gray-800 text-orange-600 dark:text-orange-400 px-2 py-1 rounded-full text-xs font-medium border border-orange-200 dark:border-gray-700">
             ${product.price}
           </span>
         </div>
@@ -33,14 +33,16 @@ const SingleAllMeals = forwardRef(({ product }, ref) => {
 
       {/* Content */}
       <div className="p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-2 capitalize">
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 capitalize">
           {product.productName}
         </h3>
 
-        <p className="text-gray-600 text-sm mb-4">{product.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+          {product.description}
+        </p>
 
         {/* Stats */}
-        <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
+        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-4">
           <div className="flex items-center gap-1">
             <Package className="w-3 h-3" />
             <span>{product.quantity} in stock</span>
@@ -61,13 +63,13 @@ const SingleAllMeals = forwardRef(({ product }, ref) => {
                 className="w-8 h-8 rounded-full object-cover"
               />
             ) : (
-              <div className="w-8 h-8 rounded-full bg-orange-200 flex items-center justify-center text-orange-600 font-semibold text-sm">
+              <div className="w-8 h-8 rounded-full bg-orange-200 dark:bg-gray-700 flex items-center justify-center text-orange-600 dark:text-orange-400 font-semibold text-sm">
                 {product.addedBy?.name
                   ? product.addedBy.name.charAt(0).toUpperCase()
                   : "?"}
               </div>
             )}
-            <span className="text-xs text-gray-600">
+            <span className="text-xs text-gray-600 dark:text-gray-300">
               {product.addedBy?.name}
             </span>
           </div>
