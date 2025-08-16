@@ -11,7 +11,6 @@ import {
   DollarSign,
   CalendarPlus,
   MessageCircle,
-  Bike,
   Zap,
   User,
   LogOut,
@@ -23,7 +22,6 @@ import { Button } from "@/components/ui/button";
 import Logo from "./../components/shared/Logo";
 import useAuth from "./../Hooks/useAuth";
 import useUserRole from "./../Hooks/useUserRole";
-import AdminProfile from './../Pages/Dashbord/Profile/AdminProfile';
 
 export default function DashboardLayout() {
   const { role } = useUserRole();
@@ -32,22 +30,21 @@ export default function DashboardLayout() {
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 
-  const activeClass = "bg-orange-50 text-orange-600 hover:bg-orange-100";
-  const inactiveClass = "text-gray-600 hover:text-gray-900 hover:bg-gray-50";
+  const activeClass =
+    "bg-orange-50 dark:bg-orange-400 text-orange-600 dark:text-orange-900 hover:bg-orange-100 dark:hover:bg-orange-200 dark:text-white";
+  const inactiveClass =
+    "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700";
 
   const renderLinks = () => (
     <>
-      {/* admin routs */}
+      {/* Admin routes */}
       {role === "admin" && (
         <>
-          {" "}
           <li>
             <NavLink
               to="adminProile"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -58,9 +55,7 @@ export default function DashboardLayout() {
             <NavLink
               to="addFood"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Utensils className="w-4 h-4" />
@@ -71,35 +66,29 @@ export default function DashboardLayout() {
             <NavLink
               to="AllPaymentStripe"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <DollarSign className="w-4 h-4" />
-              <span>All Payment Stripe</span>
+              <span>All Payments</span>
             </NavLink>
           </li>
           <li>
             <NavLink
               to="customers"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Users className="w-4 h-4" />
-              <span>Customers/makeAdmin</span>
+              <span> Make Admin</span>
             </NavLink>
           </li>
           <li>
             <NavLink
               to="myCreationList"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ListOrdered className="w-4 h-4" />
@@ -110,36 +99,29 @@ export default function DashboardLayout() {
             <NavLink
               to="dishes"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ChefHat className="w-4 h-4" />
               <span>Dishes</span>
             </NavLink>
           </li>
-           <li>
+          <li>
             <NavLink
               to="PendingRequests"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ChefHat className="w-4 h-4" />
-              <span>PendingRequests</span>
+              <span>Pending Requests</span>
             </NavLink>
           </li>
-          
           <li>
             <NavLink
               to="AddUpcomingMeals"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <CalendarPlus className="w-4 h-4" />
@@ -149,16 +131,14 @@ export default function DashboardLayout() {
         </>
       )}
 
-      {/* subcriber routs */}
+      {/* Subscriber routes */}
       {user && (
         <>
           <li>
             <NavLink
               to="profile"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Package className="w-4 h-4" />
@@ -169,9 +149,7 @@ export default function DashboardLayout() {
             <NavLink
               to="packages"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Package className="w-4 h-4" />
@@ -182,14 +160,11 @@ export default function DashboardLayout() {
       )}
       {role === "subscriber" && (
         <>
-          {" "}
           <li>
             <NavLink
               to="myPayments"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <CreditCard className="w-4 h-4" />
@@ -200,9 +175,7 @@ export default function DashboardLayout() {
             <NavLink
               to="reviews"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <MessageCircle className="w-4 h-4" />
@@ -213,9 +186,7 @@ export default function DashboardLayout() {
             <NavLink
               to="MyOrders"
               className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
+                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ReceiptText className="w-4 h-4" />
@@ -228,72 +199,58 @@ export default function DashboardLayout() {
   );
 
   return (
-    <div className="flex h-screen bg-gray-50">
-      <aside className="hidden md:flex md:flex-col md:w-64 bg-white shadow-sm border-r">
-        <div className="flex items-center justify-center py-3 flex-col">
+    <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Desktop Sidebar */}
+      <aside className="hidden md:flex md:flex-col md:w-64 bg-white dark:bg-gray-800 shadow-sm border-r dark:border-gray-700">
+        <div className="flex items-center justify-center py-4 flex-col">
           <Logo name="KJH" />
-          <p className="text-center py-1 font-bold text-xl">
+          <p className="text-center py-1 font-bold text-xl text-gray-900 dark:text-gray-100">
             Kobi Jasimuddin Hall
           </p>
         </div>
         <nav className="flex-1 p-4 overflow-auto">
           <ul className="space-y-2">{renderLinks()}</ul>
         </nav>
-        <div className="p-4 border-t">
-          <div className="mb-4 p-3 bg-orange-50 rounded-lg text-center">
+        <div className="p-4 border-t dark:border-gray-700">
+          <div className="mb-4 p-3 bg-orange-50 dark:bg-orange-500 rounded-lg text-center">
             <div className="flex items-center justify-center mb-2">
-              <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                <Zap className="w-4 h-4 text-orange-600" />
+              <div className="w-8 h-8 bg-orange-100 dark:bg-orange-200 rounded-full flex items-center justify-center">
+                <Zap className="w-4 h-4 text-orange-600 dark:text-orange-900" />
               </div>
             </div>
             <Link to="/packages">
-              <p className="text-xs text-gray-600 mb-2">
-                🔥 Upgrade Your Plan. Find Out here
+              <p className="text-xs text-gray-600 dark:text-gray-200 mb-2">
+                🔥 Upgrade Your Plan. Find Out Here
               </p>
               <Button
                 variant="outline"
                 size="sm"
-                className="w-full text-orange-600 border-orange-200 hover:bg-orange-50 bg-transparent"
+                className="w-full text-orange-600 dark:text-orange-900 border-orange-200 dark:border-orange-200 hover:bg-orange-50 dark:hover:bg-orange-200 bg-transparent"
               >
                 Contact Support
               </Button>
             </Link>
           </div>
-          <div className="space-y-1">
-            <Button
-              variant="ghost"
-              className="w-full justify-start h-9 text-gray-600"
-            >
-              <User className="w-4 h-4 mr-3" /> Profile
-            </Button>
-            <Button
-              variant="ghost"
-              className="w-full justify-start h-9 text-red-600 hover:text-red-700 hover:bg-red-50"
-            >
-              <LogOut className="w-4 h-4 mr-3" /> Logout
-            </Button>
-          </div>
+       
         </div>
       </aside>
 
+      {/* Mobile Sidebar */}
       {sidebarOpen && (
         <>
           <div
             className="fixed inset-0 bg-black bg-opacity-30 z-40 md:hidden"
             onClick={() => setSidebarOpen(false)}
           />
-          <aside className="fixed inset-y-0 left-0 w-64 bg-white shadow-lg border-r z-50 md:hidden flex flex-col">
-            <div className="p-6 border-b flex items-center justify-between">
+          <aside className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg border-r dark:border-gray-700 z-50 flex flex-col">
+            <div className="p-6 border-b dark:border-gray-700 flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
                   <Logo />
-                </div>
-                <span className="text-xl font-semibold text-gray-800">KJH</span>
               </div>
               <Button
                 variant="ghost"
                 onClick={() => setSidebarOpen(false)}
-                className="p-1 text-gray-600 hover:bg-gray-100 rounded"
+                className="p-1 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
               >
                 <CloseIcon className="w-5 h-5" />
               </Button>
@@ -301,68 +258,32 @@ export default function DashboardLayout() {
             <nav className="flex-1 p-4 overflow-auto">
               <ul className="space-y-2">{renderLinks()}</ul>
             </nav>
-            <div className="p-4 border-t">
-              <div className="mb-4 p-3 bg-orange-50 rounded-lg text-center">
-                <div className="flex items-center justify-center mb-2">
-                  <div className="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                    <Zap className="w-4 h-4 text-orange-600" />
-                  </div>
-                </div>
-                <Link to="/packages">
-                  <p className="text-xs text-gray-600 mb-2">
-                    🔥 Upgrade Your Plan. Find Out here
-                  </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full text-orange-600 border-orange-200 hover:bg-orange-50 bg-transparent"
-                  >
-                    Contact Support
-                  </Button>
-                </Link>
-              </div>
-              <div className="space-y-1">
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start h-9 text-gray-600"
-                >
-                  <User className="w-4 h-4 mr-3" /> Profile
-                </Button>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start h-9 text-red-600 hover:text-red-700 hover:bg-red-50"
-                >
-                  <LogOut className="w-4 h-4 mr-3" /> Logout
-                </Button>
-              </div>
-            </div>
           </aside>
         </>
       )}
 
       <div className="flex-1 overflow-auto flex flex-col">
-        <header className="bg-white shadow-sm border-b p-4 md:p-6 flex items-center justify-between">
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700 p-4 md:p-6 flex items-center justify-between">
           <Button
             variant="ghost"
-            className="md:hidden p-2 mr-4"
+            className="md:hidden p-2 mr-4 text-gray-600 dark:text-gray-300"
             onClick={toggleSidebar}
             aria-label="Open sidebar"
           >
             <MenuIcon className="w-6 h-6" />
           </Button>
           <div className="flex-1">
-            <h1 className="text-2xl font-semibold text-center md:text-left text-gray-900">
+            <h1 className="text-2xl font-semibold text-center md:text-left text-gray-900 dark:text-gray-100">
               Dashboard
             </h1>
-            <p className="text-gray-600 mt-1 text-center md:text-left">
+            <p className="text-gray-600 dark:text-gray-300 mt-1 text-center md:text-left">
               Welcome back! Here's what's happening today.
             </p>
           </div>
         </header>
-        <div className="px-1 flex-1">
-         
+        <main className="px-4 md:px-6 flex-1">
           <Outlet />
-        </div>
+        </main>
       </div>
     </div>
   );

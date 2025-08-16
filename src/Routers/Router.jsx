@@ -31,6 +31,7 @@ import PendingRequests from "./../Pages/Dashbord/Admin/PendingRequests/PendingRe
 import Forbidden from "./../components/shared/Forbidden";
 import AdminRoute from "./../Routes/AdminRoutes";
 import SubscriberRoute from "./../Routes/SubscriberRoute";
+import DashboardHome from "@/Pages/Dashbord/DashboardHome/DashboardHome";
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +101,10 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index:true,
+        element:<DashboardHome />
+      },
       {
         path: "MyOrders",
         element: (
