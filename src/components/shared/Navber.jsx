@@ -30,6 +30,7 @@ import Logo from "./Logo";
 import useAuth from "./../../Hooks/useAuth";
 import NotificationPanel from "./NotificationPanel";
 import { DropdownMenuDemo } from "./DropdownMenuDemo";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const { user, logOut } = useAuth();
@@ -106,6 +107,7 @@ export default function Navbar() {
 
         {/* RIGHT: Auth Buttons / Avatar */}
         <div className="flex items-center gap-3">
+          <ThemeToggle/>
           {/* MOBILE: Avatar + Sheet */}
           <div className="flex items-center gap-2 md:hidden">
             {isLoggedIn ? (
