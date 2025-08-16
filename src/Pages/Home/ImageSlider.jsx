@@ -36,11 +36,11 @@ const slides = [
 
 const ImageSlider = () => {
   return (
-    <div className="bg-orange-50 py-12 px-4">
+    <div className="bg-orange-50 dark:bg-slate-900 py-12 px-4">
       <Dot />
       <div className="container mx-auto">
         <div className="flex justify-center">
-          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flxe items-center">
+          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flex items-center">
             Different Kinds of Meals
           </div>
         </div>
@@ -53,23 +53,23 @@ const ImageSlider = () => {
             spaceBetween={20}
             slidesPerView={1}
             loop={true}
-            className="rounded-xl overflow-hidden shadow-lg"
+            className="rounded-xl overflow-hidden shadow-lg dark:shadow-gray-700"
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={index}>
-                <div className="relative w-full h-[400px] md:h-[500px] lg:h-[700px] ">
+                <div className="relative w-full h-[400px] md:h-[500px] lg:h-[700px]">
                   <img
                     src={slide.src}
                     alt={`Slide ${index}`}
-                    className="absolute inset-0 w-full h-full object-cover object-center brightness-75"
+                    className="absolute inset-0 w-full h-full object-cover object-center brightness-75 dark:brightness-50"
                   />
 
-                  <div className="absolute top-4 left-4 bg-orange-600 text-white font-semibold px-5 py-3 rounded-full shadow-lg text-lg md:text-xl">
+                  <div className="absolute top-4 left-4 bg-orange-600 dark:bg-orange-500 text-white font-semibold px-5 py-3 rounded-full shadow-lg text-lg md:text-xl">
                     {slide.price}
                   </div>
 
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="text-white text-2xl md:text-4xl font-bold bg-black/50 px-6 py-2 rounded-xl shadow-md text-center">
+                    <h3 className="text-white text-2xl md:text-4xl font-bold bg-black/50 dark:bg-black/70 px-6 py-2 rounded-xl shadow-md text-center">
                       {slide.title}
                     </h3>
                   </div>
