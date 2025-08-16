@@ -32,7 +32,7 @@ const UpcommingHome = () => {
       <Dot />
       <div className="bg-orange-50">
         <div className="flex justify-center">
-            <p className="text-xl bg-orange-200 w-fit px-5 py-2 rounded-full container">UpcommingMeals</p>
+            <p className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-6 flxe items-center">UpcommingMeals</p>
         </div>
         <div className="container mx-auto px-4 py-10">
           {/* Meals Grid */}

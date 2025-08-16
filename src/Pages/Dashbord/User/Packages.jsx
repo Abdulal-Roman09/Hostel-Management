@@ -30,15 +30,14 @@ const Packages = () => {
       <div className="bg-orange-50">
         <main className="p-6 container mx-auto">
           {/* Pricing Packages Section */}
-          <div className="mb-8">
+
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">
-                Choose Your Plan
-              </h2>
-              <p className="text-gray-600">
-                Select the perfect package for your hostel meal needs
-              </p>
-            </div>
+              <div className="flex justify-center">
+                <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flxe items-center">
+                  Choose Your Plan
+                </div>
+              </div>
+
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
               {/* Silver Package */}
@@ -47,10 +46,16 @@ const Packages = () => {
                   <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Star className="w-6 h-6 text-gray-600" />
                   </div>
-                  <CardTitle className="text-xl text-gray-800">Silver</CardTitle>
-                  <CardDescription>Perfect for small hostel users</CardDescription>
+                  <CardTitle className="text-xl text-gray-800">
+                    Silver
+                  </CardTitle>
+                  <CardDescription>
+                    Perfect for small hostel users
+                  </CardDescription>
                   <div className="mt-4">
-                    <span className="text-3xl font-bold text-gray-900">$29</span>
+                    <span className="text-3xl font-bold text-gray-900">
+                      $29
+                    </span>
                     <span className="text-gray-600">/month</span>
                   </div>
                 </CardHeader>
@@ -71,7 +76,11 @@ const Packages = () => {
                   </ul>
                   <Button
                     onClick={() =>
-                      handleChoose(29, "Silver", "Perfect for small hostel users")
+                      handleChoose(
+                        29,
+                        "Silver",
+                        "Perfect for small hostel users"
+                      )
                     }
                     className="w-full bg-gray-600 hover:bg-gray-700"
                   >
@@ -91,10 +100,16 @@ const Packages = () => {
                   <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Crown className="w-6 h-6 text-yellow-600" />
                   </div>
-                  <CardTitle className="text-xl text-yellow-800">Gold</CardTitle>
-                  <CardDescription>Best for regular hostel students</CardDescription>
+                  <CardTitle className="text-xl text-yellow-800">
+                    Gold
+                  </CardTitle>
+                  <CardDescription>
+                    Best for regular hostel students
+                  </CardDescription>
                   <div className="mt-4">
-                    <span className="text-3xl font-bold text-yellow-800">$59</span>
+                    <span className="text-3xl font-bold text-yellow-800">
+                      $59
+                    </span>
                     <span className="text-gray-600">/month</span>
                   </div>
                 </CardHeader>
@@ -116,7 +131,11 @@ const Packages = () => {
                   </ul>
                   <Button
                     onClick={() =>
-                      handleChoose(59, "Gold", "Best for regular hostel students")
+                      handleChoose(
+                        59,
+                        "Gold",
+                        "Best for regular hostel students"
+                      )
                     }
                     className="w-full bg-yellow-600 hover:bg-yellow-700"
                   >
@@ -131,10 +150,16 @@ const Packages = () => {
                   <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Crown className="w-6 h-6 text-purple-600" />
                   </div>
-                  <CardTitle className="text-xl text-purple-800">Platinum</CardTitle>
-                  <CardDescription>All-inclusive premium solution</CardDescription>
+                  <CardTitle className="text-xl text-purple-800">
+                    Platinum
+                  </CardTitle>
+                  <CardDescription>
+                    All-inclusive premium solution
+                  </CardDescription>
                   <div className="mt-4">
-                    <span className="text-3xl font-bold text-purple-800">$99</span>
+                    <span className="text-3xl font-bold text-purple-800">
+                      $99
+                    </span>
                     <span className="text-gray-600">/month</span>
                   </div>
                 </CardHeader>
@@ -157,7 +182,11 @@ const Packages = () => {
                   </ul>
                   <Button
                     onClick={() =>
-                      handleChoose(99, "Platinum", "All-inclusive premium solution")
+                      handleChoose(
+                        99,
+                        "Platinum",
+                        "All-inclusive premium solution"
+                      )
                     }
                     className="w-full bg-purple-600 hover:bg-purple-700"
                   >

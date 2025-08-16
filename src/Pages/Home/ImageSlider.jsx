@@ -31,20 +31,19 @@ const slides = [
     src: "https://i.ibb.co/35dzxrQr/nick-bratanek-h9-Yj-JSTy-Ga-Y-unsplash.jpg",
     title: "Biryani & More",
     price: "৳220",
-  }
+  },
 ];
 
 const ImageSlider = () => {
   return (
     <div className="bg-orange-50 py-12 px-4">
-        <Dot/>
+      <Dot />
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center text-orange-600 mb-4">
-          Different Kinds of Meals
-        </h2>
-        <p className="text-center text-gray-600 max-w-2xl mx-auto mb-8">
-          Explore our variety of delicious and healthy meals served at the hostel.
-        </p>
+        <div className="flex justify-center">
+          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flxe items-center">
+            Different Kinds of Meals
+          </div>
+        </div>
 
         <div className="w-full px-2 md:px-4 lg:px-6">
           <Swiper

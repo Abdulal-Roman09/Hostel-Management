@@ -22,17 +22,15 @@ export default function AppDownload() {
 
       {/* Main Grid */}
       <div className="container mx-auto px-6 py-12 relative z-10">
+           <div className="flex justify-center">
+            <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium mb-10 flxe items-center">
+              Category Meals
+            </div>
+          </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Side - Content */}
           <div>
-            <div className="mb-16">
-              <Button
-                variant="secondary"
-                className="bg-orange-200 hover:bg-orange-300 text-orange-800 border-0 rounded-full px-8 py-2 font-medium"
-              >
-                Download App
-              </Button>
-            </div>
+          
 
             <div className="max-w-xl">
               <h1 className="text-5xl md:text-6xl font-bold text-slate-800 leading-tight mb-8">

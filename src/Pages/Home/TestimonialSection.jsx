@@ -5,7 +5,6 @@ import Image from "../../assets/HKJ-1627642170.jpeg";
 import Dot from "./Dot";
 
 const TestimonialSection = () => {
-  // Generate random avatars using pravatar.cc
   const reviewerAvatars = [
     "https://i.pravatar.cc/150?img=11",
     "https://i.pravatar.cc/150?img=12",
@@ -23,14 +22,16 @@ const TestimonialSection = () => {
   const customerName = "Will Byers";
 
   return (
-    <section className="bg-orange-50 py-16 px-4 md:px-6 lg:px-8">
-      {/* Decorative random dots across the full page */}
-      {/* Center-focused decorative dots */}
-    
-<Dot/>
-     
+    <section className="bg-orange-50 dark:bg-slate-900 py-16 px-4 md:px-6 lg:px-8">
+      <Dot />
 
       <div className="container px-4 md:px-6 mx-auto">
+        <div className="flex justify-center">
+          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flxe items-center">
+            Testimonials
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Image */}
           <div className="relative">
@@ -41,8 +42,8 @@ const TestimonialSection = () => {
             />
 
             {/* Our Reviewers Badge */}
-            <div className="absolute bottom-8 left-8 bg-white rounded-lg p-4 shadow-lg">
-              <p className="text-sm font-medium text-gray-700 mb-2">
+            <div className="absolute bottom-8 left-8 bg-white dark:bg-slate-800 rounded-lg p-4 shadow-lg dark:shadow-gray-700">
+              <p className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Our Reviewers
               </p>
               <div className="flex items-center gap-2">
@@ -50,7 +51,7 @@ const TestimonialSection = () => {
                   {reviewerAvatars.map((avatar, index) => (
                     <Avatar
                       key={index}
-                      className="w-8 h-8 border-2 border-white"
+                      className="w-8 h-8 border-2 border-white dark:border-gray-700"
                     >
                       <AvatarImage src={avatar} />
                       <AvatarFallback>U{index + 1}</AvatarFallback>
@@ -66,23 +67,19 @@ const TestimonialSection = () => {
 
           {/* Right side - Testimonial */}
           <div className="space-y-8">
-            <div className="inline-block bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-medium">
-              Testimonials
-            </div>
-
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-100 leading-tight">
               What They Say About Us.
             </h2>
 
             {/* Testimonial Card */}
-            <div className="bg-white rounded-2xl p-8 shadow-sm">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-sm dark:shadow-gray-700">
               <div className="flex items-center gap-4 mb-6">
                 <Avatar className="w-12 h-12">
                   <AvatarImage src={customerAvatar} />
                   <AvatarFallback>{customerName.charAt(0)}</AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="font-semibold text-gray-900">
+                  <h3 className="font-semibold text-gray-900 dark:text-gray-100">
                     {customerName}
                   </h3>
                   <div className="flex items-center gap-1 mt-1">
@@ -101,7 +98,7 @@ const TestimonialSection = () => {
                 <div className="text-6xl text-orange-400 font-bold absolute -top-4 -left-2">
                   "
                 </div>
-                <p className="text-gray-600 text-lg leading-relaxed pl-8">
+                <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed pl-8">
                   Food is the best. Besides the many and delicious meals, the
                   service is also very good, especially in the very fast
                   delivery. I highly recommend Food to you.
@@ -118,7 +115,7 @@ const TestimonialSection = () => {
                 {bottomReviewerAvatars.map((avatar, index) => (
                   <Avatar
                     key={index}
-                    className="w-12 h-12 border-4 border-white"
+                    className="w-12 h-12 border-4 border-white dark:border-gray-700"
                   >
                     <AvatarImage src={avatar} />
                     <AvatarFallback>R{index + 1}</AvatarFallback>
