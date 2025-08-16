@@ -28,7 +28,7 @@ const Packages = () => {
         <main className="p-6 container mx-auto">
           <div className="text-center mb-8">
             <div className="flex justify-center">
-              <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flex items-center">
+              <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 ">
                 Choose Your Plan
               </div>
             </div>
