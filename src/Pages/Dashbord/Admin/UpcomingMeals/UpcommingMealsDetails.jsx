@@ -30,7 +30,6 @@ const UpcommingMealsDetails = () => {
   const navigate = useNavigate();
   const [cartQuantity, setCartQuantity] = useState(1);
 
-  // Fetch the meal details
   const {
     data: product,
     isLoading,
@@ -44,21 +43,16 @@ const UpcommingMealsDetails = () => {
     enabled: !!id,
   });
 
-  // Mutation to like the meal
   const likeMutation = useMutation({
     mutationFn: async (mealId) => {
       const res = await axiosSecure.patch(`/upcoming-meals/${mealId}/likes`);
-      return res.data; // Expect backend to return updated meal object
+      return res.data;
     },
     onSuccess: (updatedMeal) => {
-      console.log("Updated meal from backend:", updatedMeal);
-      // Update cache with fresh likes count from backend response
       queryClient.setQueryData(["upcomingMealDetails", id], (oldData) => ({
         ...oldData,
         likes: updatedMeal.likes,
       }));
-
-      // Optionally update meal list cache if you have it
       queryClient.invalidateQueries(["upcomingMeals"]);
     },
   });
@@ -73,16 +67,20 @@ const UpcommingMealsDetails = () => {
 
   if (isLoading) return <Loader />;
   if (isError || !product)
-    return <p className="text-center mt-10 text-red-600">Meal not found.</p>;
+    return (
+      <p className="text-center mt-10 text-red-600 dark:text-red-400">
+        Meal not found.
+      </p>
+    );
 
   const totalPrice = cartQuantity * product.price;
 
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-orange-50 py-8 px-4">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+      <div className="min-h-screen bg-orange-50 dark:bg-gray-900 py-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden">
             <div className="grid md:grid-cols-2">
               {/* Image Section */}
               <div className="relative">
@@ -101,10 +99,10 @@ const UpcommingMealsDetails = () => {
                     <button
                       onClick={() => likeMutation.mutate(product._id)}
                       disabled={likeMutation.isLoading}
-                      className="flex items-center gap-1 text-red-500 hover:text-red-600"
+                      className="flex items-center gap-1 hover:scale-110"
                       title="Like this meal"
                     >
-                      <FcLike className="hover:scale-120" size={60} />
+                      <FcLike size={60} />
                     </button>
                   )}
                 </div>
@@ -112,7 +110,7 @@ const UpcommingMealsDetails = () => {
 
               {/* Details Section */}
               <div className="p-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2 capitalize">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2 capitalize">
                   {product.productName}
                 </h1>
 
@@ -125,35 +123,37 @@ const UpcommingMealsDetails = () => {
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-gray-600">(4.8 rating)</span>
+                  <span className="text-sm text-gray-600 dark:text-gray-300">
+                    (4.8 rating)
+                  </span>
                 </div>
 
-                <p className="text-gray-600 text-sm mb-1">
-                  <Heart className="w-4 h-4 inline text-red-500 mr-1" />
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-1 flex items-center gap-1">
+                  <Heart className="w-4 h-4 text-red-500" />
                   {product.likes || 0} Likes
                 </p>
 
-                <p className="text-gray-600 leading-relaxed mb-6">
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                   {product.description}
                 </p>
 
                 {/* Price Info */}
                 <div className="mb-6">
                   <div className="flex items-center gap-3">
-                    <span className="text-3xl font-bold text-orange-600">
+                    <span className="text-3xl font-bold text-orange-600 dark:text-orange-400">
                       ${product.price}
                     </span>
-                    <span className="text-lg text-gray-400 line-through">
+                    {/* <span className="text-lg text-gray-400 dark:text-gray-500 line-through">
                       ${product.cost + 100}
                     </span>
-                    <span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm font-medium">
+                    <span className="bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 px-2 py-1 rounded text-sm font-medium">
                       Save ${product.cost + 100 - product.price}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
 
                 {/* Stock Info */}
-                <div className="mb-6 space-y-2 text-sm text-gray-600">
+                <div className="mb-6 space-y-2 text-sm text-gray-600 dark:text-gray-300">
                   <p className="flex items-center gap-2">
                     <Package className="w-4 h-4 text-orange-500" />
                     {product.quantity} in stock
@@ -170,24 +170,24 @@ const UpcommingMealsDetails = () => {
 
                 {/* Quantity Selector */}
                 <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Quantity
                   </label>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => handleQuantityChange("decrease")}
                       disabled={cartQuantity <= 1}
-                      className="w-10 h-10 rounded-full border border-orange-300 flex items-center justify-center hover:bg-orange-50 disabled:opacity-50"
+                      className="w-10 h-10 rounded-full border border-orange-300 dark:border-orange-500 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-orange-600 disabled:opacity-50"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
-                    <span className="w-12 text-center font-medium">
+                    <span className="w-12 text-center font-medium text-gray-900 dark:text-gray-100">
                       {cartQuantity}
                     </span>
                     <button
                       onClick={() => handleQuantityChange("increase")}
                       disabled={cartQuantity >= product.quantity}
-                      className="w-10 h-10 rounded-full border border-orange-300 flex items-center justify-center hover:bg-orange-50 disabled:opacity-50"
+                      className="w-10 h-10 rounded-full border border-orange-300 dark:border-orange-500 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-orange-600 disabled:opacity-50"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -195,10 +195,10 @@ const UpcommingMealsDetails = () => {
                 </div>
 
                 {/* Total Price */}
-                <div className="mb-6 p-4 bg-orange-50 rounded-lg">
+                <div className="mb-6 p-4 bg-orange-50 dark:bg-gray-700 rounded-lg">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700">Total Price:</span>
-                    <span className="text-2xl font-bold text-orange-600">
+                    <span className="text-gray-700 dark:text-gray-300">Total Price:</span>
+                    <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                       ${totalPrice}
                     </span>
                   </div>
@@ -208,7 +208,7 @@ const UpcommingMealsDetails = () => {
                 <div className="space-y-3">
                   <button
                     disabled
-                    className="w-full bg-gray-400 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2"
+                    className="w-full bg-gray-400 dark:bg-gray-600 text-white py-3 px-6 rounded-lg font-medium flex items-center justify-center gap-2"
                   >
                     <ShoppingCart className="w-5 h-5" />
                     Available After Approval
@@ -217,11 +217,6 @@ const UpcommingMealsDetails = () => {
               </div>
             </div>
           </div>
-
-          {/* Comments section can be enabled if you want */}
-          {/* <UpcommingMealsComments mealId={id} /> */}
-
-       
         </div>
       </div>
       <Footer />

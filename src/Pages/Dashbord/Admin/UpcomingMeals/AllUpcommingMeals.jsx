@@ -14,7 +14,6 @@ const AllUpcommingMeals = () => {
     queryKey: ["upcomingMeals"],
     queryFn: async () => {
       const res = await axiosSecure.get("/upcoming-meals");
-      console.log(res.data)
       return res.data;
     },
   });
@@ -22,7 +21,7 @@ const AllUpcommingMeals = () => {
   if (isLoading) return <Loader />;
   if (isError)
     return (
-      <p className="text-center mt-10 text-red-600">
+      <p className="text-center mt-10 text-red-600 dark:text-red-400">
         Failed to load upcoming meals.
       </p>
     );
@@ -31,7 +30,7 @@ const AllUpcommingMeals = () => {
     <>
       <Navbar />
       <Dot />
-      <div className="bg-amber-50">
+      <div className="bg-amber-50 dark:bg-gray-900 transition-colors duration-300 min-h-screen">
         <div className="container mx-auto px-4 py-10">
           {/* Meals Grid */}
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
