@@ -76,7 +76,7 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `flex items-center gap-2 text-sm font-medium transition-colors ${
                   isActive
-                    ? "text-primary font-semibold"
+                    ? "text-orange-400 font-semibold "
                     : "text-muted-foreground"
                 } hover:text-primary`
               }
