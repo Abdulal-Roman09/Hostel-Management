@@ -3,14 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Users, Calendar, Star } from "lucide-react";
 import Image from "../../assets/banner.jpeg";
-import Dot from "./Dot";
+import { TypeAnimation } from "react-type-animation"; // typewriter effect
 
 export default function Banner() {
   return (
     <div className="h-fit py-10 bg-orange-50 dark:bg-slate-900">
       {/* Hero Section */}
-
-
       <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
 
@@ -19,13 +17,26 @@ export default function Banner() {
             {/* Left Content */}
             <div className="flex flex-col justify-center space-y-6">
               <div className="space-y-4">
-                <Badge variant="secondary" className="w-fit dark:bg-slate-800 dark:text-slate-200">
+                <Badge
+                  variant="secondary"
+                  className="w-fit dark:bg-slate-800 dark:text-slate-200"
+                >
                   <Star className="w-3 h-3 mr-1" />
                   Trusted by University Admins and Students
                 </Badge>
 
+                {/* Typewriter Title */}
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text text-transparent">
-                  University Hostel Meal Management System
+                  <TypeAnimation
+                    sequence={[
+                      "University Hostel Meal Management System", 2000,
+                      "Smart Food & Student Management", 2000,
+                      "Meal Reviews & Scheduling Platform", 2000,
+                    ]}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                  />
                 </h1>
 
                 <p className="max-w-[600px] text-gray-600 dark:text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
@@ -72,7 +83,9 @@ export default function Banner() {
               {/* Trust indicators */}
               <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex items-center gap-1">
-                  <span className="font-semibold text-gray-900 dark:text-white">4.8/5</span>
+                  <span className="font-semibold text-gray-900 dark:text-white">
+                    4.8/5
+                  </span>
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
                       <Star
@@ -119,10 +132,6 @@ export default function Banner() {
                   <p className="text-xs text-orange-600 mt-1">2 mins ago</p>
                 </div>
               </div>
-
-              {/* Decorative blobs */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-orange-100 dark:bg-orange-900 rounded-full opacity-60 blur-xl"></div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-red-100 dark:bg-red-900 rounded-full opacity-60 blur-xl"></div>
             </div>
           </div>
         </div>
