@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import Logo from "./../components/shared/Logo";
 import useAuth from "./../Hooks/useAuth";
 import useUserRole from "./../Hooks/useUserRole";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 
 export default function DashboardLayout() {
   const { role } = useUserRole();
@@ -42,11 +43,14 @@ export default function DashboardLayout() {
       {/* Admin routes */}
       {role === "admin" && (
         <>
-           <li>
+          <li>
             <NavLink
               to="/dashboard"
+              end
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <HomeIcon className="w-4 h-4" />
@@ -57,7 +61,9 @@ export default function DashboardLayout() {
             <NavLink
               to="adminProile"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -68,7 +74,9 @@ export default function DashboardLayout() {
             <NavLink
               to="addFood"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Utensils className="w-4 h-4" />
@@ -79,7 +87,9 @@ export default function DashboardLayout() {
             <NavLink
               to="AllPaymentStripe"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <DollarSign className="w-4 h-4" />
@@ -90,7 +100,9 @@ export default function DashboardLayout() {
             <NavLink
               to="customers"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Users className="w-4 h-4" />
@@ -101,7 +113,9 @@ export default function DashboardLayout() {
             <NavLink
               to="myCreationList"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ListOrdered className="w-4 h-4" />
@@ -112,7 +126,9 @@ export default function DashboardLayout() {
             <NavLink
               to="dishes"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ChefHat className="w-4 h-4" />
@@ -123,7 +139,9 @@ export default function DashboardLayout() {
             <NavLink
               to="PendingRequests"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ChefHat className="w-4 h-4" />
@@ -134,7 +152,9 @@ export default function DashboardLayout() {
             <NavLink
               to="AddUpcomingMeals"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <CalendarPlus className="w-4 h-4" />
@@ -147,11 +167,14 @@ export default function DashboardLayout() {
       {/* Subscriber routes */}
       {user && (
         <>
-           <li>
+          <li>
             <NavLink
               to="/dashboard"
+              end
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <HomeIcon className="w-4 h-4" />
@@ -162,19 +185,23 @@ export default function DashboardLayout() {
             <NavLink
               to="profile"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Package className="w-4 h-4" />
               <span>Profile</span>
             </NavLink>
           </li>
-         
+
           <li>
             <NavLink
               to="packages"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <Package className="w-4 h-4" />
@@ -185,12 +212,13 @@ export default function DashboardLayout() {
       )}
       {role === "subscriber" && (
         <>
-        
           <li>
             <NavLink
               to="myPayments"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <CreditCard className="w-4 h-4" />
@@ -201,7 +229,9 @@ export default function DashboardLayout() {
             <NavLink
               to="reviews"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <MessageCircle className="w-4 h-4" />
@@ -212,7 +242,9 @@ export default function DashboardLayout() {
             <NavLink
               to="MyOrders"
               className={({ isActive }) =>
-                `${isActive ? activeClass : inactiveClass} w-full h-10 px-3 rounded flex items-center gap-2`
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
               }
             >
               <ReceiptText className="w-4 h-4" />
@@ -257,7 +289,6 @@ export default function DashboardLayout() {
               </Button>
             </Link>
           </div>
-       
         </div>
       </aside>
 
@@ -271,7 +302,7 @@ export default function DashboardLayout() {
           <aside className="fixed inset-y-0 left-0 w-64 bg-white dark:bg-gray-800 shadow-lg border-r dark:border-gray-700 z-50 flex flex-col">
             <div className="p-6 border-b dark:border-gray-700 flex items-center justify-between">
               <div className="flex items-center space-x-2">
-                  <Logo />
+                <Logo />
               </div>
               <Button
                 variant="ghost"
@@ -298,16 +329,36 @@ export default function DashboardLayout() {
           >
             <MenuIcon className="w-6 h-6" />
           </Button>
-          <div className="flex-1">
-            <h1 className="text-2xl font-semibold text-center md:text-left text-gray-900 dark:text-gray-100">
-              Dashboard
+          <div className="flex-1 ">
+            <h1 className="text-md md:text-2xl lg:text-3xl font-semibold text-center   text-orange-500 dark:text-orange-600">
+              {role} Dashboard
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-1 text-center md:text-left">
+            <p className="text-gray-600 dark:text-gray-300 mt-1 text-center text-sm">
               Welcome back! Here's what's happening today.
             </p>
           </div>
+          <div className="md:pr-10 lg:pr-20 mx-3">
+            {" "}
+            <ThemeToggle />
+          </div>
+          <div className="md:pr-10 lg:pr-20">
+            {/* Avatar */}
+            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-orange-500 ">
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName || "User"}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-orange-200 text-orange-800 font-bold text-lg">
+                  {user?.displayName?.charAt(0) || "U"}
+                </div>
+              )}
+            </div>
+          </div>
         </header>
-        <main className="px-4 md:px-6 flex-1">
+        <main className=" flex-1">
           <Outlet />
         </main>
       </div>

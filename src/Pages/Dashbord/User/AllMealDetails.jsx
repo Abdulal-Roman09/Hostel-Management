@@ -94,8 +94,8 @@ const MealDetails = () => {
   return (
     <>
       <Navbar />
- <div className="min-h-screen bg-orange-50 dark:bg-gray-900 py-8 px-4 transition-colors duration-300">
-  <div className="max-w-5xl mx-auto">
+  <div className="min-h-screen bg-orange-50 dark:bg-gray-900 py-8 px-4 transition-colors duration-300">
+  <div className="max-w-4xl mx-auto">
     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden transition-colors duration-300">
       <div className="grid md:grid-cols-2">
         {/* Image Section */}
@@ -137,12 +137,12 @@ const MealDetails = () => {
                 />
               ))}
             </div>
-            <span className="text-sm text-gray-600 dark:text-gray-400">
+            <span className="text-sm text-gray-600 dark:text-gray-300">
               (4.8 rating)
             </span>
           </div>
 
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
+          <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">
             <Heart className="w-4 h-4 inline text-red-500 mr-1" />
             {product.Likes || 0} Likes
           </p>
@@ -157,17 +157,17 @@ const MealDetails = () => {
               <span className="text-3xl font-bold text-orange-600">
                 ${product.price}
               </span>
-              {/* <span className="text-lg text-gray-400 line-through">
+              <span className="text-lg text-gray-400 line-through">
                 ${product.cost + 100}
-              </span> */}
-              {/* <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-sm font-medium">
+              </span>
+              <span className="bg-green-100 dark:bg-green-700 text-green-800 dark:text-green-100 px-2 py-1 rounded text-sm font-medium">
                 Save ${product.cost + 100 - product.price}
-              </span> */}
+              </span>
             </div>
           </div>
 
           {/* Stock Info */}
-          <div className="mb-6 space-y-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="mb-6 space-y-2 text-sm text-gray-600 dark:text-gray-300">
             <p className="flex items-center gap-2">
               <Package className="w-4 h-4 text-orange-500" />
               {product.quantity} in stock
@@ -191,17 +191,17 @@ const MealDetails = () => {
               <button
                 onClick={() => handleQuantityChange("decrease")}
                 disabled={cartQuantity <= 1}
-                className="w-10 h-10 rounded-full border border-orange-300 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-gray-700 disabled:opacity-50"
+                className="w-10 h-10 rounded-full border border-orange-300 dark:border-orange-500 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-gray-700 disabled:opacity-50"
               >
                 <Minus className="w-4 h-4" />
               </button>
-              <span className="w-12 text-center font-medium dark:text-gray-200">
+              <span className="w-12 text-center font-medium text-gray-900 dark:text-gray-100">
                 {cartQuantity}
               </span>
               <button
                 onClick={() => handleQuantityChange("increase")}
                 disabled={cartQuantity >= product.quantity}
-                className="w-10 h-10 rounded-full border border-orange-300 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-gray-700 disabled:opacity-50"
+                className="w-10 h-10 rounded-full border border-orange-300 dark:border-orange-500 flex items-center justify-center hover:bg-orange-50 dark:hover:bg-gray-700 disabled:opacity-50"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -210,10 +210,8 @@ const MealDetails = () => {
 
           {/* Total Price */}
           <div className="mb-6 p-4 bg-orange-50 dark:bg-gray-700 rounded-lg transition-colors duration-300">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-700 dark:text-gray-300">
-                Total Price:
-              </span>
+            <div className="flex justify-between items-center text-gray-900 dark:text-gray-100">
+              <span>Total Price:</span>
               <span className="text-2xl font-bold text-orange-600">
                 ${totalPrice}
               </span>
@@ -254,7 +252,9 @@ const MealDetails = () => {
       </div>
     </div>
 
-    {/* Product Info */}
+    <CommentsSection mealId={id} />
+
+    {/* Additional Info */}
     <div className="mt-8 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm transition-colors duration-300">
       <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">
         Product Information
@@ -264,7 +264,7 @@ const MealDetails = () => {
           <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">
             Details
           </h4>
-          <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+          <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
             <li>• Fresh and organic</li>
             <li>• Rich in vitamins</li>
             <li>• Premium quality</li>
@@ -275,7 +275,7 @@ const MealDetails = () => {
           <h4 className="font-medium text-gray-700 dark:text-gray-300 mb-2">
             Nutritional Benefits
           </h4>
-          <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-400">
+          <ul className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
             <li>• High in Vitamin C</li>
             <li>• Contains antioxidants</li>
             <li>• Low in calories</li>

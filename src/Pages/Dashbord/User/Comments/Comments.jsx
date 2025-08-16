@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import useAuth from "./../../../../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 const ReviewsSection = ({ mealId }) => {
   const axiosSecure = useAxiosSecure();
@@ -69,11 +70,11 @@ const ReviewsSection = ({ mealId }) => {
   };
 
   return (
-    <div className="mt-10 bg-white rounded-lg p-6 shadow max-w-4xl mx-auto">
+    <div className="mt-10 bg-white dark:bg-gray-800 rounded-lg p-6 shadow max-w-4xl mx-auto transition-colors duration-300">
       <form onSubmit={handleSubmit} className="mb-6">
         <textarea
           rows={3}
-          className="w-full border rounded p-3 resize-none focus:outline-orange-500"
+          className="w-full border rounded p-3 resize-none focus:outline-orange-500 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-300 transition-colors duration-300"
           placeholder="Write your review here..."
           value={reviewText}
           onChange={(e) => setReviewText(e.target.value)}
@@ -82,7 +83,7 @@ const ReviewsSection = ({ mealId }) => {
         <button
           type="submit"
           disabled={addReviewMutation.isLoading}
-          className="mt-2 bg-orange-500 text-white py-2 px-4 rounded hover:bg-orange-600 transition"
+          className="mt-2 bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded transition-colors duration-300"
         >
           {addReviewMutation.isLoading ? "Posting..." : "Post Review"}
         </button>
@@ -93,23 +94,27 @@ const ReviewsSection = ({ mealId }) => {
       </h3>
 
       {isLoading ? (
-        <p>Loading reviews...</p>
+        <p className="text-gray-700 dark:text-gray-300">Loading reviews...</p>
       ) : isError ? (
         <p className="text-red-600">Failed to load reviews.</p>
       ) : reviews.length === 0 ? (
-        <p className="text-gray-600">No reviews yet. Be the first to review!</p>
+        <p className="text-gray-600 dark:text-gray-300">
+          No reviews yet. Be the first to review!
+        </p>
       ) : (
         <ul className="space-y-4">
           {reviews.map((review) => (
             <li
               key={review._id || review.createdAt}
-              className="border rounded p-4 bg-orange-50"
+              className="border rounded p-4 bg-orange-50 dark:bg-gray-700 transition-colors duration-300"
             >
-              <p className="font-semibold">{review.userName || "Anonymous"}</p>
-              <p className="text-sm text-gray-600 mb-2">
+              <p className="font-semibold text-gray-900 dark:text-gray-100">
+                {review.userName || "Anonymous"}
+              </p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">
                 {new Date(review.createdAt).toLocaleString()}
               </p>
-              <p>{review.text}</p>
+              <p className="text-gray-800 dark:text-gray-100">{review.text}</p>
             </li>
           ))}
         </ul>
