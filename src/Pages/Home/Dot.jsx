@@ -31,7 +31,7 @@ const Dot = () => {
     );
   });
 
-  return <div className="absolute inset-0 pointer-events-none z-0">{dots}</div>;
+  // return <div className="absolute inset-0 pointer-events-none z-0">{dots}</div>;
 };
 
 export default Dot;
