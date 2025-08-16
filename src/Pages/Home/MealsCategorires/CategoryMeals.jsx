@@ -32,7 +32,9 @@ const CategoryMeals = () => {
   if (isLoading) return <Loader />;
   if (isError)
     return (
-      <p className="text-center mt-10 text-red-600">Failed to load meals.</p>
+      <p className="text-center mt-10 text-red-600 dark:text-red-400">
+        Failed to load meals.
+      </p>
     );
 
   const totalPages = Math.ceil(data.total / mealsPerPage);
@@ -40,18 +42,13 @@ const CategoryMeals = () => {
   return (
     <>
       <Dot />
-      <div className="bg-orange-50 py-10">
+      <div className="bg-orange-50 dark:bg-slate-900 py-10">
         <div className="container mx-auto px-4">
           <div className="flex justify-center">
-            <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flxe items-center">
+            <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 ">
               Category Meals
             </div>
           </div>
-
-          <h2 className="text-2xl font-semibold text-center text-orange-600 mb-6">
-            {category}
-          </h2>
-
           {/* Category Buttons */}
           <div className="flex flex-wrap justify-center gap-3 mb-6">
             {categories.map((cat) => (
@@ -63,8 +60,8 @@ const CategoryMeals = () => {
                 }}
                 className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-200 ${
                   category === cat
-                    ? "bg-orange-500 text-white border-orange-500"
-                    : "bg-white text-orange-600 border-orange-300 hover:bg-orange-100"
+                    ? "bg-orange-500 text-white border-orange-500 dark:bg-orange-600 dark:border-orange-600"
+                    : "bg-white text-orange-600 border-orange-300 hover:bg-orange-100 dark:bg-slate-800 dark:text-orange-400 dark:border-slate-700 dark:hover:bg-slate-700"
                 }`}
               >
                 {cat}
@@ -79,7 +76,7 @@ const CategoryMeals = () => {
                 <SingleAllMeals key={product._id} product={product} />
               ))
             ) : (
-              <p className="col-span-full text-center text-gray-500">
+              <p className="col-span-full text-center text-gray-500 dark:text-gray-400">
                 No meals found in this category.
               </p>
             )}
@@ -94,10 +91,10 @@ const CategoryMeals = () => {
                   <button
                     key={page}
                     onClick={() => setCurrentPage(page)}
-                    className={`px-3 py-1 rounded-md text-sm border ${
+                    className={`px-3 py-1 rounded-md text-sm border transition-all duration-200 ${
                       currentPage === page
-                        ? "bg-orange-500 text-white border-orange-500"
-                        : "bg-white text-orange-600 border-orange-300 hover:bg-orange-100"
+                        ? "bg-orange-500 text-white border-orange-500 dark:bg-orange-600 dark:border-orange-600"
+                        : "bg-white text-orange-600 border-orange-300 hover:bg-orange-100 dark:bg-slate-800 dark:text-orange-400 dark:border-slate-700 dark:hover:bg-slate-700"
                     }`}
                   >
                     {page}

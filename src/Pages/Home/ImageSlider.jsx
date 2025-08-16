@@ -40,7 +40,7 @@ const ImageSlider = () => {
       <Dot />
       <div className="container mx-auto">
         <div className="flex justify-center">
-          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 flex items-center">
+          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium my-10 ">
             Different Kinds of Meals
           </div>
         </div>

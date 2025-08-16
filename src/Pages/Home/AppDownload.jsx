@@ -22,7 +22,7 @@ export default function AppDownload() {
       {/* Main Grid */}
       <div className="container mx-auto px-6 py-12 relative z-10">
         <div className="flex justify-center">
-          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium mb-10 flex items-center">
+          <div className="inline-block bg-orange-100 dark:bg-orange-700 text-orange-600 dark:text-orange-100 px-4 py-2 rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-medium mb-10 ">
             Download App
           </div>
         </div>
