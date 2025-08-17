@@ -174,6 +174,34 @@ const AdminDashboardHome = () => {
               </p>
             </CardContent>
           </Card>
+               {/* avater */}
+
+          <div className="w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5  items-center gap-4 transition-colors duration-300">
+            {/* Avatar */}
+            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-orange-500 shadow-md flex items-center justify-center bg-orange-100 dark:bg-orange-700 mx-auto">
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName || "User"}
+                  className="w-full h-full object-cover mx-auto"
+                />
+              ) : (
+                <span className="text-xl font-bold text-orange-600 dark:text-orange-200">
+                  {user?.displayName?.charAt(0) || "U"}
+                </span>
+              )}
+            </div>
+
+            {/* User Info */}
+            <div className="flex flex-col">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 text-center">
+                {user?.displayName || "Anonymous User"}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+                {user?.email || "No email available"}
+              </p>
+            </div>
+          </div>
         </div>
         {/* Recent Orders & Food Items */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
