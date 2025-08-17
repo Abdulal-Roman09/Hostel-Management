@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loader from "@/Pages/Loader/Loader";
 import useAxiosSecure from "@/Hooks/useAxiosSecure";
 import useAuth from "@/Hooks/useAuth";
+import { Chart } from "@/components/ui/Chat";
 
 const AdminDashboardHome = () => {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ const AdminDashboardHome = () => {
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosSecure.get("/users");
-      console.log("All Users:", res.data);
+      console.log("All Users:", res.data.data);
       return res.data.users || [];
     },
   });
@@ -174,7 +175,7 @@ const AdminDashboardHome = () => {
               </p>
             </CardContent>
           </Card>
-               {/* avater */}
+          {/* avater */}
 
           <div className="w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5  items-center gap-4 transition-colors duration-300">
             {/* Avatar */}
@@ -305,6 +306,7 @@ const AdminDashboardHome = () => {
               </div>
             </CardContent>
           </Card>
+          <Chart />
 
           {/* User Management (All Users, 5 only) */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">

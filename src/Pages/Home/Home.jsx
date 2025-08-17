@@ -7,17 +7,19 @@ import ImageSlider from "./ImageSlider";
 import Packages from "../Dashbord/User/Packages";
 import CategoryMeals from "./MealsCategorires/CategoryMeals";
 import UpcommingHome from "./UpcommingHome";
+import FAQ from "@/components/Faq/Faq";
 
 const Home = () => {
   return (
     <div>
-      <Banner />
-      <TestimonialSection />
-      <UpcommingHome />
-      <ImageSlider />
-      <CategoryMeals />
-      <AppDownload />
-      <Packages />
+      <Banner id="banner" />
+      <TestimonialSection id="testimonials" />
+      <UpcommingHome id="upcoming" />
+      <ImageSlider id="slider" />
+      <CategoryMeals id="categories" />
+      <AppDownload id="appdownload" />
+      <FAQ id="faq" />
+      <Packages id="packages" />
     </div>
   );
 };
