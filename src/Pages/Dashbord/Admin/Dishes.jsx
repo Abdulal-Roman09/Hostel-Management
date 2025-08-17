@@ -75,14 +75,14 @@ const Dishes = () => {
     );
 
   return (
-    <div className="px-4 md:px-8 lg:px-16 py-10">
+    <div className="px-4 md:px-8 lg:px-16 py-10 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <h2 className="text-center text-3xl md:text-4xl font-bold text-orange-600 mb-8">
         🍽️ All Food Dishes
       </h2>
 
-      <div className="overflow-x-auto rounded-lg shadow-lg bg-white">
+      <div className="overflow-x-auto rounded-lg shadow-lg bg-white dark:bg-gray-800 transition-colors duration-300">
         <table className="min-w-full table-auto text-sm">
-          <thead className="bg-orange-500 text-white">
+          <thead className="bg-orange-500 dark:bg-orange-700 text-white">
             <tr className="text-left">
               <th className="px-6 py-3">#</th>
               <th className="px-6 py-3">Image</th>
@@ -100,32 +100,32 @@ const Dishes = () => {
             {allFoods.map((food, index) => (
               <tr
                 key={food._id}
-                className="hover:bg-orange-50 border-b transition duration-300"
+                className="hover:bg-orange-50 dark:hover:bg-gray-700 border-b transition duration-300"
               >
-                <td className="px-6 py-4 font-medium text-gray-700">{index + 1}</td>
+                <td className="px-6 py-4 font-medium text-gray-700 dark:text-gray-200">{index + 1}</td>
                 <td className="px-6 py-4">
                   <img
                     src={food.image}
                     alt={food.productName}
-                    className="w-12 h-12 rounded-md object-cover border"
+                    className="w-12 h-12 rounded-md object-cover border dark:border-gray-600"
                   />
                 </td>
-                <td className="px-6 py-4 text-gray-800 font-semibold">{food.productName}</td>
-                <td className="px-6 py-4 text-gray-600">{food.category}</td>
+                <td className="px-6 py-4 text-gray-800 dark:text-gray-100 font-semibold">{food.productName}</td>
+                <td className="px-6 py-4 text-gray-600 dark:text-gray-300">{food.category}</td>
                 <td className="px-6 py-4 text-green-600 font-medium">৳{food.price}</td>
-                <td className="px-6 py-4 text-gray-700">{food.comments?.length || 0}</td>
-                <td className="px-6 py-4 text-gray-700">{food.Likes || 0}</td>
+                <td className="px-6 py-4 text-gray-700 dark:text-gray-200">{food.comments?.length || 0}</td>
+                <td className="px-6 py-4 text-gray-700 dark:text-gray-200">{food.Likes || 0}</td>
                 <td className="px-6 py-4">
                   <div className="flex items-center gap-2">
                     <img
                       src={food.addedBy?.photo}
                       alt="user"
-                      className="w-8 h-8 rounded-full"
+                      className="w-8 h-8 rounded-full border dark:border-gray-600"
                     />
-                    <span>{food.addedBy?.name}</span>
+                    <span className="text-gray-800 dark:text-gray-100">{food.addedBy?.name}</span>
                   </div>
                 </td>
-                <td className="px-6 py-4 text-gray-500">
+                <td className="px-6 py-4 text-gray-500 dark:text-gray-400">
                   {new Date(food.createdAt).toLocaleDateString("en-BD", {
                     year: "numeric",
                     month: "short",
@@ -135,13 +135,13 @@ const Dishes = () => {
                 <td className="px-6 py-4 text-center space-x-2">
                   <button
                     onClick={() => setEditingDish(food)}
-                    className="bg-blue-100 hover:bg-blue-200 text-blue-600 px-3 py-1 rounded-md text-xs font-medium"
+                    className="bg-blue-100 dark:bg-blue-700 hover:bg-blue-200 dark:hover:bg-blue-600 text-blue-600 dark:text-blue-100 px-3 py-1 rounded-md text-xs font-medium transition-colors duration-200"
                   >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(food._id)}
-                    className="bg-red-100 hover:bg-red-200 text-red-600 px-3 py-1 rounded-md text-xs font-medium"
+                    className="bg-red-100 dark:bg-red-700 hover:bg-red-200 dark:hover:bg-red-600 text-red-600 dark:text-red-100 px-3 py-1 rounded-md text-xs font-medium transition-colors duration-200"
                   >
                     Delete
                   </button>
@@ -155,7 +155,7 @@ const Dishes = () => {
       {/* Edit Modal */}
       {editingDish && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white w-full max-w-md p-6 rounded-lg shadow-lg relative">
+          <div className="bg-white dark:bg-gray-800 w-full max-w-md p-6 rounded-lg shadow-lg relative transition-colors duration-300">
             <h3 className="text-lg font-bold mb-4 text-center text-orange-600">
               Edit Dish
             </h3>
@@ -174,32 +174,36 @@ const Dishes = () => {
               className="space-y-4"
             >
               <div>
-                <label className="block text-sm mb-1 font-medium">
+                <label className="block text-sm mb-1 font-medium text-gray-700 dark:text-gray-200">
                   Product Name
                 </label>
                 <input
                   name="productName"
                   defaultValue={editingDish.productName}
-                  className="w-full border px-3 py-2 rounded-md"
+                  className="w-full border px-3 py-2 rounded-md dark:bg-gray-700 dark:text-gray-100"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm mb-1 font-medium">Price</label>
+                <label className="block text-sm mb-1 font-medium text-gray-700 dark:text-gray-200">
+                  Price
+                </label>
                 <input
                   name="price"
                   type="number"
                   defaultValue={editingDish.price}
-                  className="w-full border px-3 py-2 rounded-md"
+                  className="w-full border px-3 py-2 rounded-md dark:bg-gray-700 dark:text-gray-100"
                   required
                 />
               </div>
               <div>
-                <label className="block text-sm mb-1 font-medium">Category</label>
+                <label className="block text-sm mb-1 font-medium text-gray-700 dark:text-gray-200">
+                  Category
+                </label>
                 <select
                   name="category"
                   defaultValue={editingDish.category}
-                  className="w-full border px-3 py-2 rounded-md"
+                  className="w-full border px-3 py-2 rounded-md dark:bg-gray-700 dark:text-gray-100"
                   required
                 >
                   <option value="Breakfast">Breakfast</option>
@@ -211,13 +215,13 @@ const Dishes = () => {
                 <button
                   type="button"
                   onClick={() => setEditingDish(null)}
-                  className="px-4 py-2 text-sm bg-gray-200 hover:bg-gray-300 rounded-md"
+                  className="px-4 py-2 text-sm bg-gray-200 dark:bg-gray-600 dark:text-gray-100 hover:bg-gray-300 dark:hover:bg-gray-500 rounded-md transition-colors duration-200"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-sm bg-orange-500 text-white hover:bg-orange-600 rounded-md"
+                  className="px-4 py-2 text-sm bg-orange-500 dark:bg-orange-600 text-white hover:bg-orange-600 dark:hover:bg-orange-700 rounded-md transition-colors duration-200"
                 >
                   Update
                 </button>

@@ -57,9 +57,9 @@ export default function AddFood() {
   };
 
   return (
-    <div className="min-h-screen bg-orange-50 py-6 px-4 flex justify-center">
-      <div className="w-full max-w-6xl bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-600 mb-6 text-center">
+    <div className="min-h-screen bg-orange-50 dark:bg-gray-900 py-6 px-4 flex justify-center transition-colors duration-300">
+      <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 md:p-8 transition-colors duration-300">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-600 dark:text-orange-400 mb-6 text-center transition-colors duration-300">
           Add New Food Product
         </h1>
 
@@ -69,54 +69,53 @@ export default function AddFood() {
         >
           {/* Image Upload */}
           <div className="flex-1 min-w-[260px]">
-            <label className="mb-1 font-semibold text-orange-700 flex items-center gap-2">
-              <Upload size={20} className="text-orange-600" />
+            <label className="mb-1 font-semibold text-orange-700 dark:text-orange-400 flex items-center gap-2 transition-colors duration-300">
+              <Upload size={20} className="text-orange-600 dark:text-orange-400" />
               Product Image
             </label>
             <input
               type="file"
               accept="image/*"
               {...register("image", { required: "Product image is required" })}
-              className="w-full text-sm text-gray-600
+              className="w-full text-sm text-gray-600 dark:text-gray-300
                 file:mr-4 file:py-1.5 file:px-3
                 file:rounded file:border-0
                 file:text-sm file:font-semibold
-                file:bg-orange-200 file:text-orange-800
-                hover:file:bg-orange-300"
+                file:bg-orange-200 dark:file:bg-orange-700 file:text-orange-800 dark:file:text-orange-100
+                hover:file:bg-orange-300 dark:hover:file:bg-orange-600 transition-colors duration-300"
             />
             {errors.image && (
-              <p className="text-red-600 mt-1">{errors.image.message}</p>
+              <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.image.message}</p>
             )}
           </div>
 
           {/* Product Name */}
           <div className="flex-1 min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Product Name
             </label>
             <input
               type="text"
               placeholder="Enter product name"
-              {...register("productName", {
-                required: "Product name is required",
-              })}
-              className="w-full border border-orange-400 rounded px-3 py-2
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+              {...register("productName", { required: "Product name is required" })}
+              className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2
+                bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+                focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-300"
             />
             {errors.productName && (
-              <p className="text-red-600 mt-1">{errors.productName.message}</p>
+              <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.productName.message}</p>
             )}
           </div>
 
           {/* Category */}
           <div className="flex-1 min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Category
             </label>
             <select
               {...register("category", { required: "Category is required" })}
-              className="w-full border border-orange-400 rounded px-3 py-2 bg-white
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+                focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-300"
               defaultValue=""
             >
               <option value="" disabled>
@@ -128,26 +127,25 @@ export default function AddFood() {
               <option value="Dinner">Dinner</option>
             </select>
             {errors.category && (
-              <p className="text-red-600 mt-1">{errors.category.message}</p>
+              <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.category.message}</p>
             )}
           </div>
 
           {/* Description */}
           <div className="flex-[2_1_540px] min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Description
             </label>
             <textarea
               placeholder="Enter product description"
               rows={4}
-              {...register("description", {
-                required: "Description is required",
-              })}
-              className="w-full border border-orange-400 rounded px-3 py-2 resize-none
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+              {...register("description", { required: "Description is required" })}
+              className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2 resize-none
+                bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+                focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-300"
             />
             {errors.description && (
-              <p className="text-red-600 mt-1">{errors.description.message}</p>
+              <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.description.message}</p>
             )}
           </div>
 
@@ -155,7 +153,7 @@ export default function AddFood() {
           <div className="flex gap-4 w-full max-w-3xl">
             {/* Price */}
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Price ($)
               </label>
               <input
@@ -166,31 +164,32 @@ export default function AddFood() {
                   required: "Price is required",
                   min: { value: 0, message: "Price must be positive" },
                 })}
-                className="w-full border border-orange-400 rounded px-3 py-2
-                  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2
+                  bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+                  focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-300"
               />
               {errors.price && (
-                <p className="text-red-600 mt-1">{errors.price.message}</p>
+                <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.price.message}</p>
               )}
             </div>
 
-            {/* Cost (auto-calculated) */}
+            {/* Cost */}
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Cost ($)
               </label>
               <input
                 type="number"
                 value={isNaN(totalCost) ? "" : totalCost.toFixed(2)}
                 readOnly
-                className="w-full border border-orange-400 rounded px-3 py-2
-                  focus:outline-none bg-orange-100 text-orange-800 font-semibold"
+                className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2
+                  bg-orange-100 dark:bg-orange-700 text-orange-800 dark:text-orange-100 font-semibold transition-colors duration-300"
               />
             </div>
 
             {/* Quantity */}
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Quantity
               </label>
               <input
@@ -200,11 +199,12 @@ export default function AddFood() {
                   required: "Quantity is required",
                   min: { value: 0, message: "Quantity must be positive" },
                 })}
-                className="w-full border border-orange-400 rounded px-3 py-2
-                  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full border border-orange-400 dark:border-orange-600 rounded px-3 py-2
+                  bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200
+                  focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-orange-400 transition-colors duration-300"
               />
               {errors.quantity && (
-                <p className="text-red-600 mt-1">{errors.quantity.message}</p>
+                <p className="text-red-600 dark:text-red-400 mt-1 transition-colors duration-300">{errors.quantity.message}</p>
               )}
             </div>
           </div>
@@ -214,9 +214,9 @@ export default function AddFood() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700
+              className="flex items-center gap-2 bg-orange-600 dark:bg-orange-500 hover:bg-orange-700 dark:hover:bg-orange-600
                 disabled:opacity-50 disabled:cursor-not-allowed
-                text-white font-bold py-2 px-8 rounded transition-colors"
+                text-white font-bold py-2 px-8 rounded transition-colors duration-300"
             >
               <FiPlus size={20} />
               {isSubmitting ? "UPLOADING..." : "Submit"}

@@ -169,20 +169,6 @@ export default function DashboardLayout() {
         <>
           <li>
             <NavLink
-              to="/dashboard"
-              end
-              className={({ isActive }) =>
-                `${
-                  isActive ? activeClass : inactiveClass
-                } w-full h-10 px-3 rounded flex items-center gap-2`
-              }
-            >
-              <HomeIcon className="w-4 h-4" />
-              <span>Home</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="profile"
               className={({ isActive }) =>
                 `${
@@ -212,6 +198,20 @@ export default function DashboardLayout() {
       )}
       {role === "subscriber" && (
         <>
+          <li>
+            <NavLink
+              to="/dashboard"
+              end
+              className={({ isActive }) =>
+                `${
+                  isActive ? activeClass : inactiveClass
+                } w-full h-10 px-3 rounded flex items-center gap-2`
+              }
+            >
+              <HomeIcon className="w-4 h-4" />
+              <span>Home</span>
+            </NavLink>
+          </li>
           <li>
             <NavLink
               to="myPayments"

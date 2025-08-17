@@ -20,24 +20,26 @@ const AdminProfile = () => {
   if (isLoading) return <Loader />;
   if (isError)
     return (
-      <p className="text-center text-red-600 mt-10">
+      <p className="text-center text-red-600 dark:text-red-400 mt-10 transition-colors duration-300">
         Failed to load meals for this admin.
       </p>
     );
 
   return (
-    <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4 py-10">
-      <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full text-center">
+    <div className="min-h-[70vh] flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-10 transition-colors duration-300">
+      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-xl p-8 max-w-md w-full text-center transition-colors duration-300">
         <img
           src={user?.photoURL || "/placeholder.svg"}
           alt="Admin"
-          className="w-24 h-24 rounded-full mx-auto border mb-4 object-cover"
+          className="w-24 h-24 rounded-full mx-auto border mb-4 object-cover border-gray-300 dark:border-gray-600 transition-colors duration-300"
         />
-        <h2 className="text-2xl font-bold text-gray-800 mb-1">
+        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-1 transition-colors duration-300">
           {user?.displayName || "Admin User"}
         </h2>
-        <p className="text-sm text-gray-600 mb-4">{user?.email}</p>
-        <div className="bg-orange-100 text-orange-700 font-semibold py-2 rounded-md">
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-4 transition-colors duration-300">
+          {user?.email}
+        </p>
+        <div className="bg-orange-100 dark:bg-orange-700 text-orange-700 dark:text-orange-100 font-semibold py-2 rounded-md transition-colors duration-300">
           Total Meals Added: {meals.length}
         </div>
       </div>

@@ -42,23 +42,28 @@ export default function LoginForm() {
   return (
     <>
       <Navbar />
-      <div className="py-10">
+      <div className="py-10 bg-orange-50 dark:bg-gray-900 transition-colors duration-300">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto p-4 border rounded-xl space-y-4"
+          className="max-w-md mx-auto p-6 border rounded-xl space-y-6 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 transition-colors duration-300"
         >
-          <h1 className="text-center text-4xl font-bold">Login</h1>
+          <h1 className="text-center text-4xl font-bold text-orange-500 dark:text-orange-400 transition-colors duration-300">
+            Login
+          </h1>
 
           {/* Email */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="email">
+            <label
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+              htmlFor="email"
+            >
               Email
             </label>
             <input
               id="email"
               type="email"
               {...register("email", { required: "Email is required" })}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -68,7 +73,10 @@ export default function LoginForm() {
 
           {/* Password */}
           <div>
-            <label className="block mb-1 font-medium" htmlFor="password">
+            <label
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+              htmlFor="password"
+            >
               Password
             </label>
             <input
@@ -77,7 +85,7 @@ export default function LoginForm() {
               {...register("password", {
                 required: "Password is required",
               })}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -88,17 +96,17 @@ export default function LoginForm() {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark transition"
+            className="w-full bg-primary dark:bg-orange-500 text-white py-2 rounded hover:bg-primary-dark dark:hover:bg-orange-400 transition-colors duration-300"
           >
             Login
           </button>
 
           {/* Register Link */}
-          <p className="text-sm text-center">
+          <p className="text-sm text-center text-gray-600 dark:text-gray-300 transition-colors duration-300">
             Don't have an account?{" "}
             <Link
               to="/register"
-              className="text-blue-600 hover:underline font-medium"
+              className="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-300"
             >
               Register
             </Link>

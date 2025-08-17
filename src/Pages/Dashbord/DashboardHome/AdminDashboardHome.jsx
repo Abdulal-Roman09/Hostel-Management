@@ -1,203 +1,415 @@
 import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ChefHat, Users, DollarSign, Clock, TrendingUp, AlertCircle, CheckCircle } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { User, ShoppingBag, Clock } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import Loader from "@/Pages/Loader/Loader";
+import useAxiosSecure from "@/Hooks/useAxiosSecure";
+import useAuth from "@/Hooks/useAuth";
 
 const AdminDashboardHome = () => {
-  // ------------------------
-  // Mock data for demonstration
-  // ------------------------
-  const stats = {
-    totalOrders: 156,
-    activeOrders: 12,
-    totalRevenue: 4250,
-    avgOrderTime: 18,
-  };
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-  const recentOrders = [
-    { id: "#001", customer: "John Doe", items: "Burger, Fries", total: 24.99, status: "preparing", time: "5 min ago" },
-    { id: "#002", customer: "Jane Smith", items: "Pizza Margherita", total: 18.5, status: "ready", time: "8 min ago" },
-    { id: "#003", customer: "Mike Johnson", items: "Pasta, Salad", total: 32.0, status: "delivered", time: "12 min ago" },
-    { id: "#004", customer: "Sarah Wilson", items: "Steak, Wine", total: 65.0, status: "preparing", time: "15 min ago" },
-  ];
+  // --- USERS ---
+  const {
+    data: allUsers = [],
+    isLoading: usersLoading,
+    isError: usersError,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      console.log("All Users:", res.data);
+      return res.data.users || [];
+    },
+  });
 
-  // ------------------------
-  // Functions to get status icon & badge color
-  // ------------------------
-  const getStatusIcon = (status) => {
-    switch (status) {
-      case "preparing":
-        return <Clock className="h-4 w-4 text-yellow-500" />;
-      case "ready":
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case "delivered":
-        return <CheckCircle className="h-4 w-4 text-blue-500" />;
-      default:
-        return <AlertCircle className="h-4 w-4 text-red-500" />;
-    }
-  };
+  // --- PAYMENTS ---
+  const {
+    data: payments = [],
+    isLoading: paymentsLoading,
+    isError: paymentsError,
+  } = useQuery({
+    queryKey: ["myPayments", user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/myPayments");
+      console.log("Payments:", res.data.data);
+      return res.data.data || [];
+    },
+    enabled: !!user?.email,
+  });
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "preparing":
-        return "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300";
-      case "ready":
-        return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
-      case "delivered":
-        return "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300";
-      default:
-        return "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300";
-    }
-  };
+  // --- FOODS ---
+  const {
+    data: allFoods = [],
+    isLoading: foodsLoading,
+    isError: foodsError,
+  } = useQuery({
+    queryKey: ["dishes"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/allFoods");
+      console.log("All Foods:", res.data);
+      return res.data || [];
+    },
+  });
+
+  // Loader & Error
+  if (usersLoading || paymentsLoading || foodsLoading) return <Loader />;
+  if (usersError || paymentsError || foodsError)
+    return (
+      <p className="text-red-600 dark:text-red-400 text-center mt-10">
+        Failed to fetch data
+      </p>
+    );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-6 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* ---------------- Header ---------------- */}
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 p-4 md:p-6">
+      <div className="mx-auto space-y-6">
+        {/* --- HEADER --- */}
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
-              <ChefHat className="h-8 w-8 text-orange-500" />
-              Restaurant Admin Dashboard
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+              <User className="h-6 w-6 md:h-8 md:w-8 text-red-500" />
+              Admin Dashboard
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 mt-1">Manage your restaurant operations</p>
+            <p className="text-gray-600 dark:text-gray-300 mt-1">
+              Overview of users, payments & foods
+            </p>
           </div>
-          <Button className="bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700">
-            View Full Menu
-          </Button>
         </div>
 
-        {/* ---------------- Stats Cards ---------------- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* --- QUICK STATS --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          {/* Total Users */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">Total Orders Today</CardTitle>
-              <Users className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+            <CardHeader className="flex justify-between items-center pb-2">
+              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Total Users
+              </CardTitle>
+              <User className="h-4 w-4 text-blue-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.totalOrders}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                {allUsers.length}
+              </div>
               <p className="text-xs text-gray-500 dark:text-gray-300">
-                <TrendingUp className="h-3 w-3 inline mr-1" />
-                +12% from yesterday
+                Registered Users
               </p>
             </CardContent>
           </Card>
 
+          {/* Total Payments */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">Active Orders</CardTitle>
-              <Clock className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+            <CardHeader className="flex justify-between items-center pb-2">
+              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Total Payments
+              </CardTitle>
+              <ShoppingBag className="h-4 w-4 text-green-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-orange-600">{stats.activeOrders}</div>
-              <p className="text-xs text-gray-500 dark:text-gray-300">Currently being prepared</p>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">Revenue Today</CardTitle>
-              <DollarSign className="h-4 w-4 text-gray-500 dark:text-gray-300" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">${stats.totalRevenue}</div>
+              <div className="text-2xl font-bold text-green-600">
+                {payments.length}
+              </div>
               <p className="text-xs text-gray-500 dark:text-gray-300">
-                <TrendingUp className="h-3 w-3 inline mr-1" />
-                +8% from yesterday
+                Completed Transactions
               </p>
             </CardContent>
           </Card>
 
+          {/* Pending Orders */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">Avg Order Time</CardTitle>
-              <Clock className="h-4 w-4 text-gray-500 dark:text-gray-300" />
+            <CardHeader className="flex justify-between items-center pb-2">
+              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Pending Orders
+              </CardTitle>
+              <Clock className="h-4 w-4 text-yellow-500" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.avgOrderTime} min</div>
-              <p className="text-xs text-gray-500 dark:text-gray-300">2 min faster than target</p>
+              <div className="text-2xl font-bold text-yellow-600">
+                {
+                  payments.filter((p) => p.transaction?.status === "pending")
+                    .length
+                }
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-300">
+                Waiting to process
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Total Foods */}
+          <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
+            <CardHeader className="flex justify-between items-center pb-2">
+              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Foods
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-purple-600">
+                {allFoods.length}
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-300">
+                Total Dishes
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Total Earnings */}
+          <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
+            <CardHeader className="flex justify-between items-center pb-2">
+              <CardTitle className="text-sm font-medium text-gray-900 dark:text-gray-100">
+                Total Earnings
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold text-green-600">
+                ৳
+                {payments.reduce(
+                  (sum, p) => sum + (p.recipe?.totalPrice || 0),
+                  0
+                )}
+              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-300">
+                Total money collected
+              </p>
             </CardContent>
           </Card>
         </div>
-
-        {/* ---------------- Recent Orders ---------------- */}
-        <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
-          <CardHeader>
-            <CardTitle className="text-gray-900 dark:text-gray-100">Recent Orders</CardTitle>
-            <CardDescription className="text-gray-500 dark:text-gray-300">Latest orders from your restaurant</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentOrders.map((order) => (
-                <div
-                  key={order.id}
-                  className="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg"
-                >
-                  <div className="flex items-center space-x-4">
-                    {getStatusIcon(order.status)}
-                    <div>
-                      <div className="font-medium text-gray-900 dark:text-gray-100">{order.customer}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-300">{order.items}</div>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <Badge className={getStatusColor(order.status)}>{order.status}</Badge>
-                    <div className="text-right">
-                      <div className="font-medium text-gray-900 dark:text-gray-100">${order.total}</div>
-                      <div className="text-sm text-gray-500 dark:text-gray-300">{order.time}</div>
-                    </div>
-                    <Button variant="outline" size="sm">
-                      View Details
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* ---------------- Quick Actions ---------------- */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Recent Orders & Food Items */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          {/* Recent Orders */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
             <CardHeader>
-              <CardTitle className="text-lg text-gray-900 dark:text-gray-100">Kitchen Status</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-gray-100">
+                Recent Orders
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <Button className="w-full bg-transparent" variant="outline">
-                View Kitchen Orders
-              </Button>
-              <Button className="w-full bg-transparent" variant="outline">
-                Update Menu Items
-              </Button>
+            <CardContent>
+              <div className="space-y-4">
+                {payments
+                  .slice(-5)
+                  .reverse()
+                  .map((payment) => (
+                    <div
+                      key={payment._id}
+                      className="flex items-center justify-between p-3 border rounded-lg bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <img
+                          src={
+                            payment.buyer.photo ||
+                            "/placeholder.svg?height=40&width=40"
+                          }
+                          alt={payment.buyer.name}
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                            {payment.buyer.name}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">
+                            {payment.recipe.title}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-medium text-gray-900 dark:text-gray-100">
+                          ৳{payment.recipe.totalPrice}
+                        </div>
+                        <div
+                          className={`text-xs px-2 py-1 rounded ${
+                            payment.transaction.status === "succeeded"
+                              ? "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+                              : "bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100"
+                          }`}
+                        >
+                          {payment.transaction.status}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </CardContent>
           </Card>
 
+          {/* Popular Food Items */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
             <CardHeader>
-              <CardTitle className="text-lg text-gray-900 dark:text-gray-100">Staff Management</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-gray-100">
+                Popular Food Items
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <Button className="w-full bg-transparent" variant="outline">
-                View Staff Schedule
-              </Button>
-              <Button className="w-full bg-transparent" variant="outline">
-                Add New Staff
-              </Button>
+            <CardContent>
+              <div className="space-y-4">
+                {allFoods
+                  .sort((a, b) => (b.likes || 0) - (a.likes || 0)) // sort by likes descending
+                  .slice(0, 5) // take top 5 most liked foods
+                  .map((food) => (
+                    <div
+                      key={food._id}
+                      className="flex items-center justify-between p-3 border rounded-lg bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <img
+                          src={food.image || "/placeholder.svg"}
+                          alt={food.productName}
+                          className="w-12 h-12 rounded-lg object-cover"
+                        />
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                            {food.productName}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">
+                            {food.category} • {food.likes || 0} likes
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-medium text-gray-900 dark:text-gray-100">
+                          ৳{food.price}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          Stock: {food.quantity}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </CardContent>
           </Card>
 
+          {/* User Management (All Users, 5 only) */}
           <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
             <CardHeader>
-              <CardTitle className="text-lg text-gray-900 dark:text-gray-100">Reports</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-gray-100">
+                User Management
+              </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-2">
-              <Button className="w-full bg-transparent" variant="outline">
-                Daily Sales Report
-              </Button>
-              <Button className="w-full bg-transparent" variant="outline">
-                Inventory Report
-              </Button>
+            <CardContent>
+              <div className="space-y-4">
+                {allUsers.slice(0, 5).map((user) => (
+                  <div
+                    key={user._id}
+                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 border rounded-lg bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+                  >
+                    {/* User Info */}
+                    <div className="flex items-center space-x-3">
+                      <User className="h-10 w-10 text-gray-400 bg-gray-100 dark:bg-gray-700 rounded-full p-2" />
+                      <div>
+                        <div className="font-medium text-gray-900 dark:text-gray-100">
+                          {user.email}
+                        </div>
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          {user.packages || "N/A"} • {user.role || "N/A"}
+                        </div>
+                      </div>
+                    </div>
+                    {/* Dates */}
+                    <div className="mt-2 sm:mt-0 text-left sm:text-right">
+                      <div className="text-sm text-gray-600 dark:text-gray-300">
+                        Joined:{" "}
+                        {user.created_at
+                          ? new Date(user.created_at).toLocaleDateString()
+                          : "N/A"}
+                      </div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">
+                        Last login:{" "}
+                        {user.last_login_at
+                          ? new Date(user.last_login_at).toLocaleDateString()
+                          : "N/A"}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Admin Users (5 only) */}
+          <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
+            <CardHeader>
+              <CardTitle className="text-gray-900 dark:text-gray-100">
+                Admin Users
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {allUsers
+                  .filter((user) => user.role === "admin")
+                  .slice(0, 5)
+                  .map((user) => (
+                    <div
+                      key={user._id}
+                      className="flex items-center justify-between p-3 border rounded-lg"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <User className="h-10 w-10 text-gray-400 bg-gray-100 dark:bg-gray-700 rounded-full p-2" />
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                            {user.email}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">
+                            {user.packages} • {user.role}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          Joined:{" "}
+                          {new Date(user.created_at).toLocaleDateString()}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          Last login:{" "}
+                          {new Date(user.last_login_at).toLocaleDateString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Subscriber Users (5 only) */}
+          <Card className="bg-white dark:bg-gray-800 transition-colors duration-300">
+            <CardHeader>
+              <CardTitle className="text-gray-900 dark:text-gray-100">
+                Subscribers
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {allUsers
+                  .filter((user) => user.role === "subscriber")
+                  .slice(0, 5)
+                  .map((user) => (
+                    <div
+                      key={user._id}
+                      className="flex items-center justify-between p-3 border rounded-lg"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <User className="h-10 w-10 text-gray-400 bg-gray-100 dark:bg-gray-700 rounded-full p-2" />
+                        <div>
+                          <div className="font-medium text-gray-900 dark:text-gray-100">
+                            {user.email}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-300">
+                            {user.packages} • {user.role}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          Joined:{" "}
+                          {new Date(user.created_at).toLocaleDateString()}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400">
+                          Last login:{" "}
+                          {new Date(user.last_login_at).toLocaleDateString()}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </CardContent>
           </Card>
         </div>

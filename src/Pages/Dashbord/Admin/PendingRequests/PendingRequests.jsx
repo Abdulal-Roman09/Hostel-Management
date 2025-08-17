@@ -11,7 +11,6 @@ const PendingRequests = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch all payments
   const {
     data: payments = [],
     isPending,
@@ -25,7 +24,6 @@ const PendingRequests = () => {
     enabled: !!user?.email,
   });
 
-  // Mutation to approve payment
   const updateStatusMutation = useMutation({
     mutationFn: async (id) => {
       const res = await axiosSecure.patch(`/myPayments/${id}/status`, {
@@ -46,7 +44,6 @@ const PendingRequests = () => {
     updateStatusMutation.mutate(id);
   };
 
-  // Filter only pending payments
   const pendingPayments = payments.filter(
     (payment) => payment.transaction?.status === "pending"
   );
@@ -55,22 +52,24 @@ const PendingRequests = () => {
 
   if (isError)
     return (
-      <p className="text-red-600 text-center mt-10">Failed to fetch data</p>
+      <p className="text-red-600 dark:text-red-400 text-center mt-10">
+        Failed to fetch data
+      </p>
     );
 
   return (
-    <div className="overflow-x-auto p-4 min-h-screen bg-orange-50">
-      <h2 className="text-2xl font-semibold text-orange-600 text-center mb-6">
+    <div className="overflow-x-auto p-4 min-h-screen bg-orange-50 dark:bg-gray-900 transition-colors duration-300">
+      <h2 className="text-2xl font-semibold text-orange-600 dark:text-orange-400 text-center mb-6">
         Pending Payment Requests
       </h2>
 
       {pendingPayments.length === 0 ? (
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 dark:text-gray-300">
           No pending payment requests.
         </p>
       ) : (
-        <table className="min-w-full border rounded shadow text-sm text-left bg-white">
-          <thead className="bg-orange-500 text-white">
+        <table className="min-w-full border rounded shadow text-sm text-left bg-white dark:bg-gray-800 transition-colors duration-300">
+          <thead className="bg-orange-500 dark:bg-orange-700 text-white">
             <tr>
               <th className="px-4 py-2">#</th>
               <th className="px-4 py-2">Recipe ID</th>
@@ -85,24 +84,27 @@ const PendingRequests = () => {
           </thead>
           <tbody>
             {pendingPayments.map((payment, index) => (
-              <tr key={payment._id} className="border-t hover:bg-orange-50">
-                <td className="px-4 py-2">{index + 1}</td>
-                <td className="px-4 py-2">{payment.recipe?.id}</td>
-                <td className="px-4 py-2">{payment.buyer?.email}</td>
-                <td className="px-4 py-2">{payment.recipe?.title}</td>
-                <td className="px-4 py-2">${payment.recipe?.price}</td>
-                <td className="px-4 py-2">{payment.transaction?.id}</td>
+              <tr
+                key={payment._id}
+                className="border-t hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors duration-200"
+              >
+                <td className="px-4 py-2 text-gray-700 dark:text-gray-200">{index + 1}</td>
+                <td className="px-4 py-2 text-gray-700 dark:text-gray-200">{payment.recipe?.id}</td>
+                <td className="px-4 py-2 text-gray-700 dark:text-gray-200">{payment.buyer?.email}</td>
+                <td className="px-4 py-2 text-gray-800 dark:text-gray-100">{payment.recipe?.title}</td>
+                <td className="px-4 py-2 text-green-600">{payment.recipe?.price}</td>
+                <td className="px-4 py-2 text-gray-700 dark:text-gray-200">{payment.transaction?.id}</td>
                 <td className="px-4 py-2">
-                  <span className="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-700">
+                  <span className="px-2 py-1 rounded text-xs bg-yellow-100 text-yellow-700 dark:bg-yellow-700 dark:text-yellow-100">
                     {payment.transaction?.status}
                   </span>
                 </td>
-                <td className="px-4 py-2">
+                <td className="px-4 py-2 text-gray-500 dark:text-gray-300">
                   {new Date(payment.transaction?.date).toLocaleString()}
                 </td>
                 <td className="px-4 py-2">
                   <Button
-                    className="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-1 rounded shadow-sm transition"
+                    className="bg-green-600 hover:bg-green-700 text-white font-medium px-4 py-1 rounded shadow-sm transition-colors duration-200"
                     size="sm"
                     onClick={() => handleApprove(payment._id)}
                     disabled={updateStatusMutation.isPending}

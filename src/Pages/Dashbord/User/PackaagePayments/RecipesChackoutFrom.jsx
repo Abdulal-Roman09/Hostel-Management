@@ -3,7 +3,7 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import useAuth from "./../../../../Hooks/useAuth";
 import useAxiosSecure from "./../../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 
 const RecipesChackoutFrom = ({
@@ -34,7 +34,6 @@ const RecipesChackoutFrom = ({
     setProcessing(true);
 
     try {
-      // Step 1: Create payment intent
       const { data: clientSecretData } = await axiosSecure.post(
         "/create-payment-intent",
         {
@@ -49,7 +48,6 @@ const RecipesChackoutFrom = ({
       const clientSecret = clientSecretData.clientSecret;
       const cardElement = elements.getElement(CardElement);
 
-      // Step 2: Confirm card payment
       const paymentResult = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: cardElement,
@@ -57,14 +55,12 @@ const RecipesChackoutFrom = ({
         },
       });
 
-      // Step 3: Handle result
       if (paymentResult.error) {
         setError(paymentResult.error.message);
       } else if (paymentResult.paymentIntent.status === "succeeded") {
         toast.success("Payment successful!");
         setSuccess("Payment successful!");
 
-        // Step 4: send user and seller and product info
         const recipesInfo = {
           buyer: {
             name: user?.displayName,
@@ -80,16 +76,14 @@ const RecipesChackoutFrom = ({
           transaction: {
             id: paymentResult.paymentIntent.id,
             date: new Date().toISOString(),
-            status: 'pending',
+            status: "pending",
           },
           seller: {
             name: addedByName || "N/A",
             email: addedByEmail || "N/A",
           },
         };
-        const res = await axiosSecure.post(`/myPayments`, recipesInfo);
-        console.log(res);
-
+        await axiosSecure.post(`/myPayments`, recipesInfo);
         navigate("/allMeals");
       }
     } catch (err) {
@@ -102,19 +96,35 @@ const RecipesChackoutFrom = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-4 flex flex-col w-full max-w-md mx-auto"
+      className="space-y-4 flex flex-col w-full max-w-md mx-auto
+                 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md
+                 transition-colors duration-300"
     >
-      <CardElement className="border p-2 rounded-md" />
+      <CardElement
+        options={{
+          style: {
+            base: {
+              color: "#000",
+              "::placeholder": { color: "#888" },
+              backgroundColor: "#fff",
+            },
+            invalid: { color: "#f87171" },
+          },
+        }}
+        className="border p-2 rounded-md bg-white dark:bg-gray-700"
+      />
+
       <button
         type="submit"
         disabled={!stripe || processing}
-        className="bg-orange-500 text-white px-4 py-2 rounded hover:bg-orange-600 transition"
+        className="bg-orange-500 hover:bg-orange-600 dark:bg-orange-400 dark:hover:bg-orange-500
+                   text-white px-4 py-2 rounded transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {processing ? "Processing..." : `Pay $${totalPrice}`}
       </button>
 
-      {error && <p className="text-red-600">{error}</p>}
-      {success && <p className="text-green-600">{success}</p>}
+      {error && <p className="text-red-600 dark:text-red-400">{error}</p>}
+      {success && <p className="text-green-600 dark:text-green-400">{success}</p>}
     </form>
   );
 };

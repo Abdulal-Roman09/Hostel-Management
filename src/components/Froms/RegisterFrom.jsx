@@ -54,7 +54,6 @@ export default function RegisterForm() {
         photoURL: imageUrl,
       });
 
-      // এখানে axiosSecure দিয়ে /users API কল
       await axiosSecure.post("/users", {
         email: data.email,
         role: "user",
@@ -84,23 +83,29 @@ export default function RegisterForm() {
   return (
     <>
       <Navbar />
-      <div className="py-10">
+      <div className="py-10 bg-orange-50 dark:bg-gray-900 transition-colors duration-300">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="max-w-md mx-auto p-4 border rounded-xl space-y-4"
+          className="max-w-md mx-auto p-6 border rounded-xl space-y-6 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 transition-colors duration-300"
           encType="multipart/form-data"
         >
-          <h1 className="text-center text-4xl font-bold">Register Form</h1>
+          <h1 className="text-center text-4xl font-bold text-orange-500 dark:text-orange-400 transition-colors duration-300">
+            Register Form
+          </h1>
 
+          {/* Name */}
           <div>
-            <label htmlFor="name" className="block mb-1 font-medium">
+            <label
+              htmlFor="name"
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+            >
               Name
             </label>
             <input
               id="name"
               type="text"
               {...register("name", { required: "Name is required" })}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
               placeholder="Enter your name"
             />
             {errors.name && (
@@ -108,18 +113,19 @@ export default function RegisterForm() {
             )}
           </div>
 
+          {/* Email */}
           <div>
-            <label htmlFor="email" className="block mb-1 font-medium">
+            <label
+              htmlFor="email"
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+            >
               Email
             </label>
             <input
               id="email"
               type="email"
-              {...register("email", {
-                required: "Email is required",
-               
-              })}
-              className="w-full border px-3 py-2 rounded"
+              {...register("email", { required: "Email is required" })}
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
               placeholder="Enter your email"
             />
             {errors.email && (
@@ -127,8 +133,12 @@ export default function RegisterForm() {
             )}
           </div>
 
+          {/* Password */}
           <div>
-            <label htmlFor="password" className="block mb-1 font-medium">
+            <label
+              htmlFor="password"
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+            >
               Password
             </label>
             <input
@@ -141,7 +151,7 @@ export default function RegisterForm() {
                   message: "Password must be at least 6 characters",
                 },
               })}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
               placeholder="Enter your password"
             />
             {errors.password && (
@@ -149,8 +159,12 @@ export default function RegisterForm() {
             )}
           </div>
 
+          {/* Profile Image */}
           <div>
-            <label htmlFor="image" className="block mb-1 font-medium">
+            <label
+              htmlFor="image"
+              className="block mb-1 font-medium text-gray-600 dark:text-gray-300 transition-colors duration-300"
+            >
               Profile Image
             </label>
             <input
@@ -158,7 +172,7 @@ export default function RegisterForm() {
               type="file"
               accept="image/*"
               {...register("image", { required: "Profile image is required" })}
-              className="w-full border px-3 py-2 rounded"
+              className="w-full border px-3 py-2 rounded border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-700 transition-colors duration-300"
             />
             {errors.image && (
               <p className="text-red-600 text-sm mt-1">{errors.image.message}</p>
@@ -173,16 +187,21 @@ export default function RegisterForm() {
             )}
           </div>
 
+          {/* Submit */}
           <button
             type="submit"
-            className="w-full bg-primary text-white py-2 rounded hover:bg-primary-dark transition"
+            className="w-full bg-primary dark:bg-orange-500 text-white py-2 rounded hover:bg-primary-dark dark:hover:bg-orange-400 transition-colors duration-300"
           >
             Register
           </button>
 
-          <p className="text-sm text-center">
+          {/* Login link */}
+          <p className="text-sm text-center text-gray-600 dark:text-gray-300 transition-colors duration-300">
             Already have an account?{" "}
-            <Link to="/login" className="text-blue-600 hover:underline font-medium">
+            <Link
+              to="/login"
+              className="text-blue-600 dark:text-blue-400 hover:underline font-medium transition-colors duration-300"
+            >
               Login
             </Link>
           </p>

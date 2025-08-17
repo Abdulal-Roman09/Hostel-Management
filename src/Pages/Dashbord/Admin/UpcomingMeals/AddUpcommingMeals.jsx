@@ -23,6 +23,8 @@ const AddUpcomingMeals = () => {
   const quantity = watch("quantity") || 0;
   const totalCost = parseFloat(price) * parseInt(quantity);
 
+  const watchImage = watch("image");
+
   const onSubmit = async (formData) => {
     try {
       const imageFile = formData.image[0];
@@ -59,7 +61,7 @@ const AddUpcomingMeals = () => {
   return (
     <div className="min-h-screen bg-orange-50 dark:bg-gray-900 py-6 px-4 flex justify-center transition-colors duration-300">
       <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-6 md:p-8 transition-colors duration-300">
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-600 dark:text-orange-400 mb-6 text-center">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-orange-600 dark:text-orange-400 mb-6 text-center transition-colors duration-300">
           Add Upcoming Meal
         </h1>
 
@@ -69,7 +71,7 @@ const AddUpcomingMeals = () => {
         >
           {/* Image Upload */}
           <div className="flex-1 min-w-[260px]">
-            <label className="mb-1 font-semibold text-orange-700 dark:text-orange-400 flex items-center gap-2">
+            <label className="mb-1 font-semibold text-orange-700 dark:text-orange-400 flex items-center gap-2 transition-colors duration-300">
               <Upload size={20} className="text-orange-600 dark:text-orange-400" />
               Meal Image
             </label>
@@ -83,16 +85,23 @@ const AddUpcomingMeals = () => {
                 file:text-sm file:font-semibold
                 file:bg-orange-200 file:text-orange-800
                 dark:file:bg-orange-700 dark:file:text-orange-200
-                hover:file:bg-orange-300 dark:hover:file:bg-orange-600"
+                hover:file:bg-orange-300 dark:hover:file:bg-orange-600 transition-colors duration-300"
             />
             {errors.image && (
               <p className="text-red-600 dark:text-red-400 mt-1">{errors.image.message}</p>
+            )}
+            {watchImage && watchImage.length > 0 && (
+              <img
+                src={URL.createObjectURL(watchImage[0])}
+                alt="Preview"
+                className="mt-2 h-24 w-24 object-cover rounded transition-all duration-300"
+              />
             )}
           </div>
 
           {/* Meal Name */}
           <div className="flex-1 min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Meal Name
             </label>
             <input
@@ -101,7 +110,7 @@ const AddUpcomingMeals = () => {
               {...register("productName", { required: "Meal name is required" })}
               className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2
                 bg-white dark:bg-gray-700 dark:text-gray-200
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+                focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors duration-300"
             />
             {errors.productName && (
               <p className="text-red-600 dark:text-red-400 mt-1">{errors.productName.message}</p>
@@ -110,13 +119,13 @@ const AddUpcomingMeals = () => {
 
           {/* Category */}
           <div className="flex-1 min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Category
             </label>
             <select
               {...register("category", { required: "Category is required" })}
               className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2 bg-white dark:bg-gray-700 dark:text-gray-200
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+                focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors duration-300"
               defaultValue=""
             >
               <option value="" disabled>
@@ -134,7 +143,7 @@ const AddUpcomingMeals = () => {
 
           {/* Description */}
           <div className="flex-[2_1_540px] min-w-[260px]">
-            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+            <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
               Description
             </label>
             <textarea
@@ -143,7 +152,7 @@ const AddUpcomingMeals = () => {
               {...register("description", { required: "Description is required" })}
               className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2 resize-none
                 bg-white dark:bg-gray-700 dark:text-gray-200
-                focus:outline-none focus:ring-2 focus:ring-orange-500"
+                focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors duration-300"
             />
             {errors.description && (
               <p className="text-red-600 dark:text-red-400 mt-1">{errors.description.message}</p>
@@ -153,7 +162,7 @@ const AddUpcomingMeals = () => {
           {/* Price, Cost, Quantity */}
           <div className="flex gap-4 w-full max-w-3xl">
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Price ($)
               </label>
               <input
@@ -163,7 +172,7 @@ const AddUpcomingMeals = () => {
                 {...register("price", { required: "Price is required", min: { value: 0, message: "Must be positive" } })}
                 className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2
                   bg-white dark:bg-gray-700 dark:text-gray-200
-                  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors duration-300"
               />
               {errors.price && (
                 <p className="text-red-600 dark:text-red-400 mt-1">{errors.price.message}</p>
@@ -171,7 +180,7 @@ const AddUpcomingMeals = () => {
             </div>
 
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Cost ($)
               </label>
               <input
@@ -179,12 +188,12 @@ const AddUpcomingMeals = () => {
                 value={isNaN(totalCost) ? "" : totalCost.toFixed(2)}
                 readOnly
                 className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2
-                  bg-orange-100 dark:bg-gray-600 dark:text-gray-200 text-orange-800 font-semibold"
+                  bg-orange-100 dark:bg-gray-600 dark:text-gray-200 text-orange-800 font-semibold transition-colors duration-300"
               />
             </div>
 
             <div className="flex-1 min-w-[80px]">
-              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400">
+              <label className="block mb-1 font-semibold text-orange-700 dark:text-orange-400 transition-colors duration-300">
                 Quantity
               </label>
               <input
@@ -193,7 +202,7 @@ const AddUpcomingMeals = () => {
                 {...register("quantity", { required: "Quantity is required", min: { value: 0, message: "Must be positive" } })}
                 className="w-full border border-orange-400 dark:border-gray-600 rounded px-3 py-2
                   bg-white dark:bg-gray-700 dark:text-gray-200
-                  focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors duration-300"
               />
               {errors.quantity && (
                 <p className="text-red-600 dark:text-red-400 mt-1">{errors.quantity.message}</p>
@@ -209,7 +218,7 @@ const AddUpcomingMeals = () => {
               className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700
                 dark:bg-orange-500 dark:hover:bg-orange-600
                 disabled:opacity-50 disabled:cursor-not-allowed
-                text-white font-bold py-2 px-8 rounded transition-colors"
+                text-white font-bold py-2 px-8 rounded transition-colors duration-300"
             >
               <FiPlus size={20} />
               {isSubmitting ? "UPLOADING..." : "Submit Meal"}
